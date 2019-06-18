@@ -1,0 +1,16 @@
+.header {
+  min-height: 30px;
+  background: #FFA384;
+  margin: auto;
+}
+.routes {
+  text-align: center;
+  width: 100%;
+  margin: auto;
+}
+.header a {
+  line-height: 30px;
+  padding: 0px 15px;
+  text-align: center;
+  color: white;
+}

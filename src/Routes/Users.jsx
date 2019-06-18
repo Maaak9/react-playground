@@ -1,12 +1,12 @@
 import React from "react";
 import Header from '../Layouts/Header';
 
-class Home extends React.Component {
+class Users extends React.Component {
     render() {
       return (
           <div>
               <Header />
-              <div>homepage</div>
+              <div>users!</div>
               <div>Body!! </div> 
               <div>Footer</div>
           </div>
@@ -14,5 +14,5 @@ class Home extends React.Component {
     }
   }
 
-export default Home;
+export default Users;
 
