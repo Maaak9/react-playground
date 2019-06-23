@@ -10,6 +10,7 @@ class Home extends React.Component {
           <Link to="/">Home</Link>
           <Link to="/about/">About</Link>
           <Link to="/users/">Users</Link>
+          <Link to="/game/">Game</Link>
         </div>
       </div>
     );

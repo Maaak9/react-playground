@@ -4,10 +4,7 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Home from './Routes/Home';
 import Users from './Routes/Users';
 import About from './Routes/About';
-
-function Index() {
-  return <h2>Home</h2>;
-}
+import Game from './Routes/Game';
 
 function AppRouter() {
   return (
@@ -16,6 +13,7 @@ function AppRouter() {
         <Route path="/" exact component={Home} />
         <Route path="/about/" component={About} />
         <Route path="/users/" component={Users} />
+        <Route path="/game/" component={Game} />
       </div>
     </Router>
   );
