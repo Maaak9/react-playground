@@ -1,7 +1,10 @@
 .header {
+  position: fixed;
+  width: 100%;
   min-height: 30px;
   background: #FFA384;
   margin: auto;
+  z-index: 10;
 }
 .routes {
   text-align: center;
