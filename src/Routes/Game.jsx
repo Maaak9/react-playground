@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux'
 import Header from '../Layouts/Header';
 import Body from '../Layouts/Body';
 
@@ -46,5 +47,20 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+
+
+const mapStateToProps = (state, ownProps) => {
+  console.warn('mapStateToProps', state);
+  return {
+    ...ownProps,
+    testText: state.testText,
+  };
+}
+const mapDispatchToProps = dispatch => ({
+})
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)
 
