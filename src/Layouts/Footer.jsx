@@ -1,11 +1,11 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import '../Css/Layouts/Body.css';
+import '../Css/Layouts/Footer.css';
 
-class Body extends React.Component {
+class Footer extends React.Component {
   render() {
     return (
-      <div className="body-wrapper">
+      <div className="footer-wrapper">
         <div className="container-fluid">
           <div className="row">
             {this.props.children}
@@ -16,4 +16,4 @@ class Body extends React.Component {
   }
 }
 
-export default Body;
+export default Footer;

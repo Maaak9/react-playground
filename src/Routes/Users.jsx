@@ -1,6 +1,7 @@
 import React from "react";
 import Header from '../Layouts/Header';
 import Body from '../Layouts/Body';
+import Footer from '../Layouts/Footer';
 
 class Users extends React.Component {
   render() {
@@ -19,6 +20,7 @@ class Users extends React.Component {
             <div className="col-md-2 col-sm-6">9</div>
             <div className="col-md-2 col-sm-6">10</div>
         </Body>
+        <Footer />
       </div>
     )
   }

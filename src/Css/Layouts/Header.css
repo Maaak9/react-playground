@@ -1,7 +1,7 @@
 .header {
   position: fixed;
   width: 100%;
-  min-height: 30px;
+  min-height: 50px;
   background: #FFA384;
   margin: auto;
   z-index: 10;
@@ -12,7 +12,7 @@
   margin: auto;
 }
 .header a {
-  line-height: 30px;
+  line-height: 50px;
   padding: 0px 15px;
   text-align: center;
   color: white;

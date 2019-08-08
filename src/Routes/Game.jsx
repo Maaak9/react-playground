@@ -1,7 +1,10 @@
 import React from "react";
+import io from 'socket.io-client';
+
 import { connect } from 'react-redux'
 import Header from '../Layouts/Header';
 import Body from '../Layouts/Body';
+import Footer from '../Layouts/Footer';
 
 import '../Css/Pages/Game.css';
 
@@ -10,8 +13,9 @@ import '../Css/Pages/Game.css';
 class Home extends React.Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      hej: 5
+      hej: 5,
     };
 
     this.canvasRef = React.createRef();
@@ -27,21 +31,24 @@ class Home extends React.Component {
   }
 
   render() {
-
     const { clientWidth, clientHeight } = document.body;
 
-    console.warn('clientHeight', clientHeight);
-    
+
+    const socket = io('http://localhost:8000');
+    socket.on('connect', function(){});
+    console.warn('socket', socket);
+
+
 
     return (
       <div>
         <Header />
         <Body>
-          <div>This is the game page</div>
           <div className="game-container">
             <canvas ref={this.canvasRef} height="400px" width="680px" className="game-canvas" />
           </div>
         </Body>
+        <Footer />
       </div>
     )
   }
