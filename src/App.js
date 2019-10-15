@@ -7,6 +7,7 @@ import Home from './Routes/Home';
 import Users from './Routes/Users';
 import About from './Routes/About';
 import Game from './Routes/Game';
+import Spotify from './Routes/Spotify';
 
 import bomberManReducer from './Redux/Reducers/bomberManReducer';
 
@@ -23,6 +24,7 @@ function AppRouter() {
           <Route path="/about/" component={About} />
           <Route path="/users/" component={Users} />
           <Route path="/game/" component={Game} />
+          <Route path="/Spotify/" component={Spotify} />
         </div>
       </Router>
     </Provider>
