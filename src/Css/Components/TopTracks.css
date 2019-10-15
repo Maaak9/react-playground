@@ -1,0 +1,8 @@
+.spotify--top-tracks ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spotify--top-tracks li {
+  margin: 10px;
+}

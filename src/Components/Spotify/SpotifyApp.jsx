@@ -1,6 +1,8 @@
 import React from "react";
 import axios from 'axios';
 
+import TopTracks from './TopTracks';
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
@@ -56,6 +58,9 @@ class SpotifyApp extends React.Component {
       })
     }).then((res) => {
       console.warn('res', res);
+      res.json().then((json) => {
+        console.warn('json response', json);
+      });
     })
     }
 
@@ -89,40 +94,29 @@ class SpotifyApp extends React.Component {
     window.location.href = loginUrl;
   }
 
+/*
+      body: JSON.stringify({ type: 'tracks' }),
+*/
+
   doOtherStuffy() {
-    console.warn('doOtherStuffy yeppyepp', this.state.oAuth2Spotify);
-
-    const headers = {
-      'Authorization': `Basic ${btoa({'059334fb1bcb4d8d91407121f11646e4': 'eb19a46b7ca9492598542b191634ce95'})}`
-    }
-
-    const body = {
-      grant_type: 'authorization_code',
-      code: this.state.oAuth2Spotify,
-      redirect_uri: 'http://localhost:3000/spotify/',
-      client_id: '059334fb1bcb4d8d91407121f11646e4',
-      client_secret: 'eb19a46b7ca9492598542b191634ce95',
-    };
-
-    console.warn('headers', headers);
-    console.warn('body', body);
-
-
-
-    axios.post('https://accounts.spotify.com/api/token', body, {
-      headers: headers
+    fetch("https://api.spotify.com/v1/me/top/tracks", {
+      method: 'get',
+      headers: new Headers({
+        'Authorization': 'Bearer ' + this.state.access_token,
+      })
+    }).then((res) => {
+      res.json().then((json) => {
+        console.warn('json response', json);
+        this.setState({ topTracks: json });
+      });
     })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
 
   }
 
 
   render() {
+    const { topTracks } = this.state;
+
     return (
       <div>
         <h2>spotify app should be here</h2>
@@ -130,8 +124,13 @@ class SpotifyApp extends React.Component {
           Autherize spotify?
         </button>
         <div>
-          <button onClick={this.doOtherStuffy}>test the post thingy</button>
+          <button onClick={this.doOtherStuffy}>Get the top tracks</button>
         </div>
+        { this.state.topTracks ? (
+          <TopTracks
+            topTracks={topTracks}
+          />
+        ) : null}
       </div>
     )
   }
