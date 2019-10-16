@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { createStore } from 'redux'
+import { createStore, applyMiddleware, combineReducers } from 'redux'
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux'
 
 import Home from './Routes/Home';
@@ -9,11 +10,18 @@ import About from './Routes/About';
 import Game from './Routes/Game';
 import Spotify from './Routes/Spotify';
 
+import SpotifyReducer from './/Redux/Reducers/SpotifyReducer';
 import bomberManReducer from './Redux/Reducers/bomberManReducer';
 
 
 
-const store = createStore(bomberManReducer);
+const store = createStore(combineReducers({
+  bomberman: bomberManReducer,
+  spotify: SpotifyReducer
+}),
+  applyMiddleware(thunk),
+  //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
 
 function AppRouter() {
   return (
