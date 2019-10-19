@@ -1,10 +1,11 @@
 import React from "react";
-import '../../Css/Components/TopTracks.css';
+import '../../css/components/topTracks.css';
 
 export default function(props) {
   console.warn('this is the props', props);
 
   const { items } = props.topTracks;
+  const { playTrack } = props;
 
   console.warn('items', items);
 
@@ -14,7 +15,10 @@ export default function(props) {
       <ul>
         { items.map((item, index) => {
           return (
-            <li key={`${item.artists[0].name} - ${item.name}`}>
+            <li
+              onClick={() => { playTrack(item); }}
+              key={`${item.artists[0].name} - ${item.name}`}
+            >
               <div>
                 {`${index + 1}: ${item.artists[0].name} - ${item.name}`}
               </div>

@@ -1,3 +1,5 @@
+import { SET_CURRENT_TRACK } from '../Actions/SpotifyActions';
+
 const defaultState = {
   spotifyTest: 'yeeeeppp',
   auth: {},
@@ -5,6 +7,8 @@ const defaultState = {
 
 
 const SpotifyReducer = (state = defaultState, action) => {
+  console.warn('action.type', action.type);
+
   switch (action.type) {
     case 'SET_SPOTIFY_AUTH':
       return {
@@ -17,6 +21,12 @@ const SpotifyReducer = (state = defaultState, action) => {
       return {
         ...state,
         topTracks: action.topTracks,
+      };
+    }
+    case SET_CURRENT_TRACK: {
+      return {
+        ...state,
+        currentTrack: action.track,
       };
     }
     default:

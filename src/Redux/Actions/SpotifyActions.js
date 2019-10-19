@@ -1,3 +1,5 @@
+export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
+
 const SpotifyWebApi = require('spotify-web-api-js');
 const spotifyApi = new SpotifyWebApi();
 
@@ -16,7 +18,7 @@ export const getSpotifyAuth = () => () => {
 
   const loginUrl = `${spotifyAuthUrl}${clientId}${encodedScopes}${encodedRedirectUri}`;
   window.location.href = loginUrl;
-}
+};
 
 export const initSpotify = () => (dispatch, getState) => {
   const { authToken } = getState().spotify.auth;
@@ -32,7 +34,6 @@ export const initSpotify = () => (dispatch, getState) => {
 };
 
 export const getTopTracks = () => (dispatch, getState) => {
-
   spotifyApi.getMyTopTracks({
     limit: '50',
   }).then((data) => {
@@ -44,7 +45,6 @@ export const getTopTracks = () => (dispatch, getState) => {
 };
 
 export const spotifyPlayerPlay = () => (dispatch, getState) => {
-  console.warn('qwewewew');
   spotifyApi.getMyCurrentPlaybackState({}).then((data) => {
     console.warn("Now Playing: ", data);
   }, function(err) {
@@ -58,28 +58,34 @@ export const spotifyPlayerPlay = () => (dispatch, getState) => {
       position: 5,
     },
   }).then((data) => {
-    console.warn("Now Playing: ", data);
-  }, (err) => {
-    console.warn('Something went wrong!', err);
-  });
+    console.log("Now Playing: ", data);
+  }, (err) => { console.warn('Something went wrong!', err); });
 };
 
 export const spotifyPlayerPause = () => (dispatch, getState) => {
-  console.warn('about to pause?');
-
   spotifyApi.pause({}).then((data) => {
-    console.warn("Pause: ", data);
-  }, (err) => {
-    console.warn('Something went wrong!', err);
-  });
+    console.log("Pause: ", data);
+  }, (err) => { console.warn('Something went wrong!', err); });
 };
 
-export const SpotifySearch = (searchText) => (dispatch, getState) => {
-  console.warn('searchText', searchText);
-
+export const spotifySearch = (searchText) => (dispatch, getState) => {
   spotifyApi.searchTracks(searchText).then((data) => {
-    console.warn("Search: ", data);
-  }, (err) => {
-    console.warn('Something went wrong!', err);
+    console.log("Search: ", data);
+  }, (err) => { console.warn('Something went wrong!', err); });
+};
+
+export const playTrack = (track, positionMs = 0) => (dispatch, getState) => {
+  console.warn('about to play the uri', track, positionMs);
+
+  dispatch({
+    type: SET_CURRENT_TRACK,
+    track,
   });
+
+  spotifyApi.play({
+    uris: [track.uri],
+    position_ms: positionMs,
+  }).then((data) => {
+    console.warn("play: ", data);
+  }, (err) => { console.warn('Something went wrong!', err); });
 };

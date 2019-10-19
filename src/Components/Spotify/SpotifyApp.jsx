@@ -7,11 +7,13 @@ import {
   getTopTracks,
   spotifyPlayerPlay,
   spotifyPlayerPause,
-  SpotifySearch,
+  spotifySearch,
+  playTrack,
 } from '../../Redux/Actions/SpotifyActions';
 
 import TopTracks from './TopTracks';
 import Search from './Search';
+import SpotifyPlayer from './SpotifyPlayer';
 
 class SpotifyApp extends React.Component {
   constructor(props) {
@@ -28,11 +30,13 @@ class SpotifyApp extends React.Component {
       topTracks,
       spotifyPlayerPlay,
       spotifyPlayerPause,
-      SpotifySearch,
+      spotifySearch,
+      playTrack,
+      currentTrack
     } = this.props;
 
     return (
-      <div>
+      <div className="spotify-app">
         <h2>spotify app should be here</h2>
         <button onClick={() => getSpotifyAuth()}>
           Autherize spotify?
@@ -46,10 +50,15 @@ class SpotifyApp extends React.Component {
         <div>
           <button onClick={() => spotifyPlayerPause()}>Pause</button>
         </div>
+        <SpotifyPlayer
+          currentTrack={currentTrack}
+          playTrack={playTrack}
+        />
         <div>
           { topTracks ? (
             <TopTracks
               topTracks={topTracks}
+              playTrack={playTrack}
             />
           ) : null}
         </div>
@@ -58,7 +67,7 @@ class SpotifyApp extends React.Component {
         </div>
         <div>
           <Search
-            SpotifySearch={SpotifySearch}
+            spotifySearch={spotifySearch}
           />
         </div>
       </div>
@@ -70,6 +79,7 @@ function mapStateToProps(state) {
   console.warn('the state 5555', state);
   return {
     topTracks: state.spotify.topTracks,
+    currentTrack: state.spotify.currentTrack,
   };
 }
 
@@ -79,7 +89,8 @@ const mapDispatchToProps = (dispatch, props) => ({
   getTopTracks: () => { return dispatch(getTopTracks()); },
   spotifyPlayerPlay: () => { return dispatch(spotifyPlayerPlay()); },
   spotifyPlayerPause: () => { return dispatch(spotifyPlayerPause()); },
-  SpotifySearch: (searchText) => { return dispatch(SpotifySearch(searchText)) }
+  spotifySearch: (searchText) => { return dispatch(spotifySearch(searchText)) },
+  playTrack: (track, positionMs) => { dispatch(playTrack(track, positionMs)); },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpotifyApp)
