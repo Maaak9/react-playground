@@ -12,11 +12,11 @@ export default function(props) {
     <div className="spotify--top-tracks">
       <h2>Top Tracks!</h2>
       <ul>
-        { items.map((item) => {
+        { items.map((item, index) => {
           return (
             <li key={`${item.artists[0].name} - ${item.name}`}>
               <div>
-                {`${item.artists[0].name} - ${item.name}`}
+                {`${index + 1}: ${item.artists[0].name} - ${item.name}`}
               </div>
               <div>
                 <img src={item.album.images[1].url} />
