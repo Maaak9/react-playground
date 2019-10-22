@@ -12,8 +12,6 @@ const defaultState = {
 
 
 const SpotifyQuizReducer = (state = defaultState, action) => {
-  console.warn('action.type', action.type);
-
   switch (action.type) {
     default:
       return state;

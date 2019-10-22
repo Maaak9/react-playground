@@ -1,12 +1,8 @@
 import React from "react";
 
 export default function(props) {
-  console.warn('this is the props', props);
-
   const { items } = props.topTracks;
   const { playTrack } = props;
-
-  console.warn('items', items);
 
   return (
     <div className="spotify--top-tracks">

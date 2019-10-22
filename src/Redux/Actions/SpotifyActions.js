@@ -1,5 +1,7 @@
 export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
 export const SET_SPOTIFY_SEARCH_RESULT = 'SET_SPOTIFY_SEARCH_RESULT';
+export const SET_AVAILABLE_DEVICES = 'SET_AVAILABLE_DEVICES';
+export const SET_SELECTED_DEVICE = 'SET_SELECTED_DEVICE';
 
 const SpotifyWebApi = require('spotify-web-api-js');
 const spotifyApi = new SpotifyWebApi();
@@ -30,9 +32,23 @@ export const initSpotify = () => (dispatch, getState) => {
     if (token) {
       spotifyApi.setAccessToken(token[0]);
       dispatch({ type: 'SET_SPOTIFY_AUTH', authToken: token[0] });
+      dispatch(getAvailableDevices());
     }
   }
 };
+
+export const getAvailableDevices = () => (dispatch, getState) => {
+  console.log('getMyDevices');
+  spotifyApi.getMyDevices().then((data) => {
+    console.log("getMyDevices: ", data);
+    dispatch({ type: SET_AVAILABLE_DEVICES, devices: data.devices });
+  }, (err) => { console.warn('Something went wrong!', err); });
+};
+
+export const selectDevice = (device) => (dispatch, getState) => {
+  console.log('selectDevice', device);
+  dispatch({ type: SET_SELECTED_DEVICE, device });
+}
 
 export const getTopTracks = () => (dispatch, getState) => {
   spotifyApi.getMyTopTracks({
@@ -78,6 +94,7 @@ export const spotifySearch = (searchText) => (dispatch, getState) => {
 
 export const playTrack = (track, positionMs = 0) => (dispatch, getState) => {
   console.warn('about to play the uri', track, positionMs);
+  const { selectedDevice } = getState().spotify;
 
   dispatch({
     type: SET_CURRENT_TRACK,
@@ -85,6 +102,7 @@ export const playTrack = (track, positionMs = 0) => (dispatch, getState) => {
   });
 
   spotifyApi.play({
+    device_id: selectedDevice.id,
     uris: [track.uri],
     position_ms: positionMs,
   }).then((data) => {

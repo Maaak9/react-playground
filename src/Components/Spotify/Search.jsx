@@ -2,9 +2,6 @@ import React, { useState } from 'react';
 
 export default function(props) {
   const { spotifySearch } = props;
-
-  console.warn('lelel props', props);
-
   const [searchText, setSearchText] = useState('');
 
   const handleKeyDown = (e) => {

@@ -1,15 +1,8 @@
 import React from "react";
 
 export default function(props) {
-  console.warn('this is the props', props);
-
-  console.log('props.searcbResult.tracks', props.searchResult.tracks);
-
-
   const { items } = props.searchResult.tracks;
   const { playTrack } = props;
-
-  console.warn('items', items);
 
   return (
     <div className="spotify--search-result">
