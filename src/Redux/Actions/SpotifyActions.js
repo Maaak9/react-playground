@@ -70,7 +70,7 @@ export const spotifyPlayerPause = () => (dispatch, getState) => {
 };
 
 export const spotifySearch = (searchText) => (dispatch, getState) => {
-  spotifyApi.searchTracks({ q: searchText, limit: 20 }).then((data) => {
+  spotifyApi.searchTracks(searchText, { limit: 20 }).then((data) => {
     console.log("Search: ", data);
     dispatch({ type: SET_SPOTIFY_SEARCH_RESULT, searchData: data });
   }, (err) => { console.warn('Something went wrong!', err); });

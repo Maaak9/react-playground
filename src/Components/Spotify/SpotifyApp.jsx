@@ -16,6 +16,7 @@ import '../../css/components/spotifyApp.css';
 import TopTracks from './TopTracks';
 import Search from './Search';
 import SpotifyPlayer from './SpotifyPlayer';
+import ListTracks from './ListTracks';
 
 class SpotifyApp extends React.Component {
   constructor(props) {
@@ -34,24 +35,41 @@ class SpotifyApp extends React.Component {
       spotifyPlayerPause,
       spotifySearch,
       playTrack,
-      currentTrack
+      currentTrack,
+      searchResult
     } = this.props;
+
+
 
     return (
       <div className="spotify-app">
         <h2>spotify app should be here</h2>
         <div className="spotify-button-wrapper">
-          <button onClick={() => getSpotifyAuth()}>
+          <button className="btn btn-secondary" onClick={() => getSpotifyAuth()}>
             Autherize spotify?
           </button>
-          <button onClick={() => getTopTracks()}>Get the top tracks</button>
-          <button onClick={() => spotifyPlayerPlay()}>Start</button>
-          <button onClick={() => spotifyPlayerPause()}>Pause</button>
+          <button className="btn btn-secondary" onClick={() => getTopTracks()}>Get the top tracks</button>
+          <button className="btn btn-secondary" onClick={() => spotifyPlayerPlay()}>Start</button>
+          <button className="btn btn-secondary" onClick={() => spotifyPlayerPause()}>Pause</button>
         </div>
         <SpotifyPlayer
           currentTrack={currentTrack}
           playTrack={playTrack}
         />
+        <div>
+          <Search
+            spotifySearch={spotifySearch}
+          />
+        </div>
+        <div>
+          { searchResult ? (
+            <ListTracks
+              searchResult={searchResult}
+              playTrack={playTrack}
+            />
+          ) : null
+          }
+        </div>
         <div>
           { topTracks ? (
             <TopTracks
@@ -59,11 +77,6 @@ class SpotifyApp extends React.Component {
               playTrack={playTrack}
             />
           ) : null}
-        </div>
-        <div>
-          <Search
-            spotifySearch={spotifySearch}
-          />
         </div>
       </div>
     )
@@ -75,6 +88,7 @@ function mapStateToProps(state) {
   return {
     topTracks: state.spotify.topTracks,
     currentTrack: state.spotify.currentTrack,
+    searchResult: state.spotify.searchResult,
   };
 }
 
