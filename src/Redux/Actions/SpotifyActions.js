@@ -1,4 +1,5 @@
 export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
+export const SET_SPOTIFY_SEARCH_RESULT = 'SET_SPOTIFY_SEARCH_RESULT';
 
 const SpotifyWebApi = require('spotify-web-api-js');
 const spotifyApi = new SpotifyWebApi();
@@ -69,8 +70,9 @@ export const spotifyPlayerPause = () => (dispatch, getState) => {
 };
 
 export const spotifySearch = (searchText) => (dispatch, getState) => {
-  spotifyApi.searchTracks(searchText).then((data) => {
+  spotifyApi.searchTracks({ q: searchText, limit: 20 }).then((data) => {
     console.log("Search: ", data);
+    dispatch({ type: SET_SPOTIFY_SEARCH_RESULT, searchData: data });
   }, (err) => { console.warn('Something went wrong!', err); });
 };
 

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export default function(props) {
-  const { SpotifySearch } = props;
+  const { spotifySearch } = props;
 
   console.warn('lelel props', props);
 
@@ -10,7 +10,7 @@ export default function(props) {
   return (
     <div className="spotify--top-tracks">
       <input onChange={(e) => {setSearchText(e.target.value)}} placeholder="Search"></input>
-      <button onClick={() => SpotifySearch(searchText)}>Search</button>
+      <button onClick={() => spotifySearch(searchText)}>Search</button>
     </div>
   )
 

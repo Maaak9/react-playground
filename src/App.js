@@ -11,13 +11,15 @@ import Game from './Routes/Game';
 import Spotify from './Routes/Spotify';
 
 import SpotifyReducer from './/Redux/Reducers/SpotifyReducer';
+import SpotifyQuizReducer from './/Redux/Reducers/SpotifyQuiz';
 import bomberManReducer from './Redux/Reducers/bomberManReducer';
 
 
 
 const store = createStore(combineReducers({
   bomberman: bomberManReducer,
-  spotify: SpotifyReducer
+  spotify: SpotifyReducer,
+  spotifyQuiz: SpotifyQuizReducer,
 }),
   compose(
     applyMiddleware(thunk),

@@ -11,6 +11,8 @@ import {
   playTrack,
 } from '../../Redux/Actions/SpotifyActions';
 
+import '../../css/components/spotifyApp.css';
+
 import TopTracks from './TopTracks';
 import Search from './Search';
 import SpotifyPlayer from './SpotifyPlayer';
@@ -38,16 +40,12 @@ class SpotifyApp extends React.Component {
     return (
       <div className="spotify-app">
         <h2>spotify app should be here</h2>
-        <button onClick={() => getSpotifyAuth()}>
-          Autherize spotify?
-        </button>
-        <div>
+        <div className="spotify-button-wrapper">
+          <button onClick={() => getSpotifyAuth()}>
+            Autherize spotify?
+          </button>
           <button onClick={() => getTopTracks()}>Get the top tracks</button>
-        </div>
-        <div>
           <button onClick={() => spotifyPlayerPlay()}>Start</button>
-        </div>
-        <div>
           <button onClick={() => spotifyPlayerPause()}>Pause</button>
         </div>
         <SpotifyPlayer
@@ -61,9 +59,6 @@ class SpotifyApp extends React.Component {
               playTrack={playTrack}
             />
           ) : null}
-        </div>
-        <div>
-          <img src="https://i.ibb.co/pdwJ6nm/winamp-blog.jpg" />
         </div>
         <div>
           <Search

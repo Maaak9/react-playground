@@ -1,4 +1,4 @@
-import { SET_CURRENT_TRACK } from '../Actions/SpotifyActions';
+import { SET_CURRENT_TRACK, SET_SPOTIFY_SEARCH_RESULT } from '../Actions/SpotifyActions';
 
 const defaultState = {
   spotifyTest: 'yeeeeppp',
@@ -27,6 +27,12 @@ const SpotifyReducer = (state = defaultState, action) => {
       return {
         ...state,
         currentTrack: action.track,
+      };
+    }
+    case SET_SPOTIFY_SEARCH_RESULT: {
+      return {
+        ...state,
+        searchResult: action.searchData,
       };
     }
     default:

@@ -1,0 +1,13 @@
+.spotify-app {
+  padding: 10px;
+  min-height: 1000px;
+}
+
+.spotify-button-wrapper {
+  display: flex;
+  margin: 10px;
+}
+
+.spotify-button-wrapper button {
+  margin: 5px;
+}
