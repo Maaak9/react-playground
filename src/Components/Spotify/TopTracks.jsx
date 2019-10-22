@@ -1,5 +1,4 @@
 import React from "react";
-//import '../../css/components/topTracks.css';
 
 export default function(props) {
   console.warn('this is the props', props);
