@@ -1,9 +1,8 @@
 #root {
-  background: pink;
+  background: #F9F9F9;
 }
 
 .body-wrapper {
-  height: 2000px;
   color: black;
   padding-top: 50px;
   background: green;

@@ -1,141 +1,105 @@
 import React from "react";
-import axios from 'axios';
+import { connect } from 'react-redux'
 
-/**
- * Generates a random string containing numbers and letters
- * @param  {number} length The length of the string
- * @return {string} The generated string
- */
-var generateRandomString = function(length) {
-  var text = '';
-  var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+import {
+  initSpotify,
+  getSpotifyAuth,
+  getTopTracks,
+  spotifyPlayerPlay,
+  spotifyPlayerPause,
+  spotifySearch,
+  playTrack,
+} from '../../Redux/Actions/SpotifyActions';
 
-  for (var i = 0; i < length; i++) {
-    text += possible.charAt(Math.floor(Math.random() * possible.length));
-  }
-  return text;
-};
+import '../../css/components/spotifyApp.css';
+
+import TopTracks from './TopTracks';
+import Search from './Search';
+import SpotifyPlayer from './SpotifyPlayer';
+import ListTracks from './ListTracks';
 
 class SpotifyApp extends React.Component {
   constructor(props) {
     super(props);
 
-    const url = window.location.href;
-    const access_token = url.match(/(?<=access_token=)(.*)(?=&token)/g);
-
-    this.state = {
-      access_token,
-    };
-
-    console.warn('this.state', this.state);
-
-    this.onClickGetAuth = this.onClickGetAuth.bind(this);
-    this.getUsersDevices = this.getUsersDevices.bind(this);
-    this.doOtherStuffy = this.doOtherStuffy.bind(this);
-
-    if (this.state.access_token) {
-      this.getUsersDevices();
-    }
+    props.initSpotify();
   }
-
-  getUsersDevices() {
-    console.warn('getUserdev');
-
-    const config = {
-      headers: {
-        'Authorization': `Bearer ${this.state.access_token}`
-      }
-    };
-
-    console.warn('config', config);
-
-    fetch('https://api.spotify.com/v1/me', {
-      method: 'get',
-      headers: new Headers({
-        'Authorization': 'Bearer ' + this.state.access_token,
-      })
-    }).then((res) => {
-      console.warn('res', res);
-    })
-    }
-
-  onClickGetAuth() {
-    console.warn('clicked auth!');
-
-    const scopes = [
-      'user-read-email',
-      'user-read-private',
-      'user-follow-read',
-      'user-library-read',
-      'user-read-playback-state',
-      'user-library-modify',
-      'user-read-currently-playing',
-      'user-modify-playback-state',
-      'user-follow-modify',
-      'playlist-read-collaborative',
-      'streaming',
-      'user-top-read',
-      'app-remote-control',
-      'user-read-recently-played'
-    ]
-
-
-    const loginUrl = 'https://accounts.spotify.com/authorize' +
-    '?response_type=token' +
-    '&client_id=' + '059334fb1bcb4d8d91407121f11646e4' +
-    '&scope=' + encodeURIComponent(scopes.join(', ')) +
-    '&redirect_uri=' + encodeURIComponent('http://localhost:3000/spotify/');
-
-    window.location.href = loginUrl;
-  }
-
-  doOtherStuffy() {
-    console.warn('doOtherStuffy yeppyepp', this.state.oAuth2Spotify);
-
-    const headers = {
-      'Authorization': `Basic ${btoa({'059334fb1bcb4d8d91407121f11646e4': 'eb19a46b7ca9492598542b191634ce95'})}`
-    }
-
-    const body = {
-      grant_type: 'authorization_code',
-      code: this.state.oAuth2Spotify,
-      redirect_uri: 'http://localhost:3000/spotify/',
-      client_id: '059334fb1bcb4d8d91407121f11646e4',
-      client_secret: 'eb19a46b7ca9492598542b191634ce95',
-    };
-
-    console.warn('headers', headers);
-    console.warn('body', body);
-
-
-
-    axios.post('https://accounts.spotify.com/api/token', body, {
-      headers: headers
-    })
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-  }
-
 
   render() {
+    console.warn('props?', this.props);
+    const {
+      getTopTracks,
+      getSpotifyAuth,
+      topTracks,
+      spotifyPlayerPlay,
+      spotifyPlayerPause,
+      spotifySearch,
+      playTrack,
+      currentTrack,
+      searchResult
+    } = this.props;
+
+
+
     return (
-      <div>
+      <div className="spotify-app">
         <h2>spotify app should be here</h2>
-        <button onClick={this.onClickGetAuth}>
-          Autherize spotify?
-        </button>
+        <div className="spotify-button-wrapper">
+          <button className="btn btn-secondary" onClick={() => getSpotifyAuth()}>
+            Autherize spotify?
+          </button>
+          <button className="btn btn-secondary" onClick={() => getTopTracks()}>Get the top tracks</button>
+          <button className="btn btn-secondary" onClick={() => spotifyPlayerPlay()}>Start</button>
+          <button className="btn btn-secondary" onClick={() => spotifyPlayerPause()}>Pause</button>
+        </div>
+        <SpotifyPlayer
+          currentTrack={currentTrack}
+          playTrack={playTrack}
+        />
         <div>
-          <button onClick={this.doOtherStuffy}>test the post thingy</button>
+          <Search
+            spotifySearch={spotifySearch}
+          />
+        </div>
+        <div>
+          { searchResult ? (
+            <ListTracks
+              searchResult={searchResult}
+              playTrack={playTrack}
+            />
+          ) : null
+          }
+        </div>
+        <div>
+          { topTracks ? (
+            <TopTracks
+              topTracks={topTracks}
+              playTrack={playTrack}
+            />
+          ) : null}
         </div>
       </div>
     )
   }
+};
+
+function mapStateToProps(state) {
+  console.warn('the state 5555', state);
+  return {
+    topTracks: state.spotify.topTracks,
+    currentTrack: state.spotify.currentTrack,
+    searchResult: state.spotify.searchResult,
+  };
 }
 
-export default SpotifyApp;
+const mapDispatchToProps = (dispatch, props) => ({
+  initSpotify: () => { return dispatch(initSpotify()); },
+  getSpotifyAuth: () => { return dispatch(getSpotifyAuth()); },
+  getTopTracks: () => { return dispatch(getTopTracks()); },
+  spotifyPlayerPlay: () => { return dispatch(spotifyPlayerPlay()); },
+  spotifyPlayerPause: () => { return dispatch(spotifyPlayerPause()); },
+  spotifySearch: (searchText) => { return dispatch(spotifySearch(searchText)) },
+  playTrack: (track, positionMs) => { dispatch(playTrack(track, positionMs)); },
+});
 
+export default connect(mapStateToProps, mapDispatchToProps)(SpotifyApp)

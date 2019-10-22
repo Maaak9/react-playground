@@ -1,0 +1,57 @@
+.spotify-app {
+  background: #FCFCFC;
+  padding: 10px;
+  min-height: 1000px;
+  width: 100%;
+}
+
+.spotify-button-wrapper {
+  display: flex;
+  margin: 10px;
+}
+
+.spotify-button-wrapper button {
+  margin: 5px;
+}
+
+.spotify-player {
+  border-radius: 5px;
+  margin: 15px;
+  padding: 10px;
+  background: #e8e8e8;
+}
+
+.spotify--top-tracks ul {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.spotify--top-tracks li {
+  margin: 10px;
+  list-style-type: none;
+}
+
+.spotify--top-tracks li img {
+  max-width: 100px;
+}
+
+.spotify--search-result div img {
+  max-width: 150px;
+}
+
+.spotify--search-result div {
+  margin: 5px;
+}
+
+.spotify--search-result .title-wrapper {
+  font-size: 12px;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.spotify--search-result {
+  display: flex;
+  flex-wrap: wrap;
+}
+

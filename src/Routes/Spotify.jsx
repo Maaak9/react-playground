@@ -4,16 +4,18 @@ import Footer from '../Layouts/Footer';
 import Body from '../Layouts/Body';
 import SpotifyApp from "../Components/Spotify/SpotifyApp";
 
+import '../css/pages/spotify.css';
+
 class Home extends React.Component {
     render() {
       return (
+        <div className="spotify-page">
+          <Header />
           <div>
-              <Header />
-              <Body>
-                <SpotifyApp />
-              </Body>
-              <Footer />
+            <SpotifyApp />
           </div>
+          <Footer />
+        </div>
       )
     }
   }
