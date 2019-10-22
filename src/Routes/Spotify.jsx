@@ -4,7 +4,6 @@ import Footer from '../Layouts/Footer';
 import Body from '../Layouts/Body';
 import SpotifyApp from "../Components/Spotify/SpotifyApp";
 
-import '../css/pages/spotify.css';
 
 class Home extends React.Component {
     render() {
