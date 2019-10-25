@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import debounce from '../../Util/debounce.js';
 import Marker from './Marker';
 import PropTypes from 'prop-types';
-import '../../css/components/slider.css';
+import '../../styles/css/components/slider.css';
 
 const createId = function () {
   return '_' + Math.random().toString(36).substr(2, 9);

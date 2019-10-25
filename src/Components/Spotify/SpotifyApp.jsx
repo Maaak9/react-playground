@@ -12,7 +12,7 @@ import {
   selectDevice,
 } from '../../Redux/Actions/SpotifyActions';
 
-import '../../css/components/spotifyApp.css';
+import '../../styles/css/components/spotifyApp.css';
 
 import TopTracks from './TopTracks';
 import Search from './Search';

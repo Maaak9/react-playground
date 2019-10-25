@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import '../css/layouts/footer.css';
+import '../styles/css/layouts/footer.css';
 
 class Footer extends React.Component {
   render() {

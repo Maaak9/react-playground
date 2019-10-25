@@ -1,6 +1,6 @@
 import React from "react";
 // import { Link } from "react-router-dom";
-import '../css/layouts/body.css';
+import '../styles/css/layouts/body.css';
 
 class Body extends React.Component {
   render() {
