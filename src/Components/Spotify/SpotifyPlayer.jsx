@@ -1,8 +1,6 @@
 import React from "react";
 import Slider from '../Slider/RangeSlider';
 import debounce from '../../Util/debounce.js';
-import '../../css/components/spotifyPlayer.css';
-
 
 export default class SpotifyPlayer extends React.Component {
   constructor(props) {

@@ -1,18 +1,13 @@
 import React from "react";
 
 export default function(props) {
-  console.warn('this is the props', props);
+  const { playTrack, title, items } = props;
 
-  console.log('props.searcbResult.tracks', props.searchResult.tracks);
-
-
-  const { items } = props.searchResult.tracks;
-  const { playTrack } = props;
-
-  console.warn('items', items);
+  console.log('the list! ', props)
 
   return (
-    <div className="spotify--search-result">
+    <div className="spotify--list-tracks">
+      <h2>{title}</h2>
       { items.map((item, index) => {
         return (
           <div

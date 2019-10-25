@@ -77,3 +77,9 @@
   background: transparent;
   margin-top: -6px;
 }
+
+.spotify-player--slider-track {
+  margin-top: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
+}

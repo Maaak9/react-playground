@@ -6,7 +6,7 @@ import Header from '../Layouts/Header';
 import Body from '../Layouts/Body';
 import Footer from '../Layouts/Footer';
 
-import '../Css/Pages/Game.css';
+import '../css/pages/Game.css';
 
 
 

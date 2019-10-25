@@ -1,13 +1,8 @@
 import React from "react";
-import '../../css/components/topTracks.css';
 
 export default function(props) {
-  console.warn('this is the props', props);
-
   const { items } = props.topTracks;
   const { playTrack } = props;
-
-  console.warn('items', items);
 
   return (
     <div className="spotify--top-tracks">
@@ -19,7 +14,7 @@ export default function(props) {
               onClick={() => { playTrack(item); }}
               key={`${item.artists[0].name} - ${item.name}`}
             >
-              <div>
+              <div className="title-wrapper">
                 {`${index + 1}: ${item.artists[0].name} - ${item.name}`}
               </div>
               <div>
