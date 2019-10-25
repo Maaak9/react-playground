@@ -23,6 +23,20 @@ export const getSpotifyAuth = () => () => {
   window.location.href = loginUrl;
 };
 
+export const selectDevice = (device) => (dispatch) => {
+  dispatch({ type: SET_SELECTED_DEVICE, device });
+};
+
+export const getAvailableDevices = () => (dispatch) => {
+  spotifyApi.getMyDevices().then((data) => {
+    dispatch({ type: SET_AVAILABLE_DEVICES, devices: data.devices });
+    // if we have device set first one as default
+    if (data.devices.length > 0) {
+      dispatch(selectDevice(data.devices[0]));
+    }
+  }, (err) => { console.warn('Something went wrong!', err); });
+};
+
 export const initSpotify = () => (dispatch, getState) => {
   const { authToken } = getState().spotify.auth;
 
@@ -37,24 +51,10 @@ export const initSpotify = () => (dispatch, getState) => {
   }
 };
 
-export const getAvailableDevices = () => (dispatch, getState) => {
-  console.log('getMyDevices');
-  spotifyApi.getMyDevices().then((data) => {
-    console.log("getMyDevices: ", data);
-    dispatch({ type: SET_AVAILABLE_DEVICES, devices: data.devices });
-  }, (err) => { console.warn('Something went wrong!', err); });
-};
-
-export const selectDevice = (device) => (dispatch, getState) => {
-  console.log('selectDevice', device);
-  dispatch({ type: SET_SELECTED_DEVICE, device });
-}
-
-export const getTopTracks = () => (dispatch, getState) => {
+export const getTopTracks = () => (dispatch) => {
   spotifyApi.getMyTopTracks({
     limit: '50',
   }).then((data) => {
-    console.warn("Now Playing: ", data);
     dispatch({ type: 'SET_TOP_TRACKS', topTracks: data });
   }, (err) => {
     console.warn('Something went wrong!', err);
@@ -63,7 +63,6 @@ export const getTopTracks = () => (dispatch, getState) => {
 
 export const spotifyPlayerPlay = () => (dispatch, getState) => {
   spotifyApi.getMyCurrentPlaybackState({}).then((data) => {
-    console.warn("Now Playing: ", data);
   }, function(err) {
     console.warn('Something went wrong!', err);
   });
@@ -74,26 +73,21 @@ export const spotifyPlayerPlay = () => (dispatch, getState) => {
     offset: {
       position: 5,
     },
-  }).then((data) => {
-    console.log("Now Playing: ", data);
-  }, (err) => { console.warn('Something went wrong!', err); });
+  }).then((data) => {}, (err) => { console.warn('Something went wrong!', err); });
 };
 
 export const spotifyPlayerPause = () => (dispatch, getState) => {
   spotifyApi.pause({}).then((data) => {
-    console.log("Pause: ", data);
   }, (err) => { console.warn('Something went wrong!', err); });
 };
 
 export const spotifySearch = (searchText) => (dispatch, getState) => {
   spotifyApi.searchTracks(searchText, { limit: 20 }).then((data) => {
-    console.log("Search: ", data);
     dispatch({ type: SET_SPOTIFY_SEARCH_RESULT, searchData: data });
   }, (err) => { console.warn('Something went wrong!', err); });
 };
 
 export const playTrack = (track, positionMs = 0) => (dispatch, getState) => {
-  console.warn('about to play the uri', track, positionMs);
   const { selectedDevice } = getState().spotify;
 
   dispatch({
@@ -105,7 +99,5 @@ export const playTrack = (track, positionMs = 0) => (dispatch, getState) => {
     device_id: selectedDevice.id,
     uris: [track.uri],
     position_ms: positionMs,
-  }).then((data) => {
-    console.warn("play: ", data);
-  }, (err) => { console.warn('Something went wrong!', err); });
+  }).then((data) => {}, (err) => { console.warn('Something went wrong!', err); });
 };

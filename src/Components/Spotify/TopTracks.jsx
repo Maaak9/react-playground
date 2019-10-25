@@ -14,7 +14,7 @@ export default function(props) {
               onClick={() => { playTrack(item); }}
               key={`${item.artists[0].name} - ${item.name}`}
             >
-              <div>
+              <div className="title-wrapper">
                 {`${index + 1}: ${item.artists[0].name} - ${item.name}`}
               </div>
               <div>

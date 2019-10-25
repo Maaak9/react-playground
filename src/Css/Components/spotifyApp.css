@@ -35,23 +35,41 @@
   max-width: 100px;
 }
 
-.spotify--search-result div img {
-  max-width: 150px;
-}
-
-.spotify--search-result div {
-  margin: 5px;
-}
-
-.spotify--search-result .title-wrapper {
+.spotify--top-tracks .title-wrapper {
   font-size: 12px;
   max-width: 150px;
   white-space: nowrap;
   overflow: hidden;
 }
 
-.spotify--search-result {
+.spotify--list-tracks h2 {
+  width: 100%;
+}
+
+.spotify--list-tracks div img {
+  max-width: 150px;
+}
+
+.spotify--list-tracks div {
+  margin: 5px;
+}
+
+.spotify--list-tracks .title-wrapper {
+  font-size: 12px;
+  max-width: 150px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.spotify--list-tracks {
   display: flex;
   flex-wrap: wrap;
 }
 
+/*
+  font-family: 'Righteous', cursive;
+  font-family: 'Lato', sans-serif;
+  font-family: 'Nothing You Could Do', cursive;
+  font-family: 'Source Code Pro', monospace;
+  font-family: 'Shadows Into Light', cursive;
+*/

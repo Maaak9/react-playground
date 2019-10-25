@@ -91,7 +91,8 @@ class SpotifyApp extends React.Component {
           <div>
             { searchResult ? (
               <ListTracks
-                searchResult={searchResult}
+                title={"Search result"}
+                items={searchResult.tracks.items}
                 playTrack={playTrack}
               />
             ) : null
@@ -99,11 +100,13 @@ class SpotifyApp extends React.Component {
           </div>
           <div>
             { topTracks ? (
-              <TopTracks
-                topTracks={topTracks}
+              <ListTracks
+                title={"Toptracks"}
+                items={topTracks.items}
                 playTrack={playTrack}
               />
-            ) : null}
+            ) : null
+            }
           </div>
         </div>
       </React.Fragment>
