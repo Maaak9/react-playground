@@ -1,0 +1,11 @@
+#root {
+  background: #F9F9F9;
+}
+
+.body-wrapper {
+  color: black;
+  padding-top: 50px;
+  background: green;
+  max-width: 1200px;
+  margin: auto;
+}

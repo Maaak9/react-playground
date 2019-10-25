@@ -1,0 +1,19 @@
+.header {
+  position: fixed;
+  width: 100%;
+  min-height: 50px;
+  background: #80B7A7;
+  margin: auto;
+  z-index: 10;
+}
+.routes {
+  text-align: center;
+  width: 100%;
+  margin: auto;
+}
+.header a {
+  line-height: 50px;
+  padding: 0px 15px;
+  text-align: center;
+  color: white;
+}
