@@ -31,7 +31,16 @@
 
 .spotify-player .spotify-player--slider-track {
   flex-grow: 1;
-  margin: auto 20px auto 40px;
+  margin: auto 20px 4px 40px;
+}
+
+.spotify-player .controllers {
+  text-align: center;
+  margin: 10px;
+}
+
+.spotify-player .controllers button {
+  margin: 0 5px 0 5px;
 }
 
 .spotify-player .left-container {

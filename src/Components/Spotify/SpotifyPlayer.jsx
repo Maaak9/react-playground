@@ -55,6 +55,10 @@ export default class SpotifyPlayer extends React.Component {
           </div>
         </div>
         <div className="spotify-player--slider-track">
+          <div className="controllers">
+            <button className="btn btn-secondary">S</button>
+            <button className="btn btn-secondary">P</button>
+          </div>
           <Slider
             className="track"
             minn={0}
