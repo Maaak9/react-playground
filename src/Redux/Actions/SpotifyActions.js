@@ -1,3 +1,5 @@
+import { SPOTIFY_REDIRECT_URL } from '../../env.js';
+
 export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
 export const SET_SPOTIFY_SEARCH_RESULT = 'SET_SPOTIFY_SEARCH_RESULT';
 export const SET_AVAILABLE_DEVICES = 'SET_AVAILABLE_DEVICES';
@@ -17,7 +19,7 @@ export const getSpotifyAuth = () => () => {
   const clientId = '&client_id=059334fb1bcb4d8d91407121f11646e4';
   const spotifyAuthUrl = 'https://accounts.spotify.com/authorize?response_type=token';
   const encodedScopes = `&scope=${encodeURIComponent(scopes.join(', '))}`;
-  const encodedRedirectUri = `&redirect_uri=${encodeURIComponent('http://localhost:3000/spotify/')}`;
+  const encodedRedirectUri = `&redirect_uri=${encodeURIComponent(SPOTIFY_REDIRECT_URL)}`;
 
   const loginUrl = `${spotifyAuthUrl}${clientId}${encodedScopes}${encodedRedirectUri}`;
   window.location.href = loginUrl;
