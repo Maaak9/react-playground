@@ -11,9 +11,9 @@
 }
 
 .slider-marker {
-  margin-top: -6px;
-  width: 16px;
-  height: 16px;
+  margin-top: -5px;
+  width: 12px;
+  height: 12px;
   border-radius: 50%;
   background-color: #000;
   -ms-touch-action: pan-x;
@@ -59,7 +59,7 @@
 .interval-track {
   position: absolute;
   left: 0;
-  height: 4px;
+  height: 3px;
   border-radius: 6px;
   background-color: #000;
   left: 0%;

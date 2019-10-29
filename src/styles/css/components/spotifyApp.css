@@ -15,10 +15,32 @@
 }
 
 .spotify-player {
+  display: flex;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px 10px 20px;
   border-radius: 5px;
-  margin: 15px;
-  padding: 10px;
-  background: #e8e8e8;
+  background: #80B7A7;
+}
+
+.spotify-player .left-container img{
+  width: 75px;
+}
+
+.spotify-player .spotify-player--slider-track {
+  flex-grow: 1;
+  margin: auto 20px auto 40px;
+}
+
+.spotify-player .left-container {
+  display: flex;
+}
+
+.spotify-player .artist-track {
+  font-size: 12px;
+  margin: auto auto auto 10px;
 }
 
 .spotify--top-tracks ul {

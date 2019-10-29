@@ -42,11 +42,17 @@ export default class SpotifyPlayer extends React.Component {
 
     if (!currentTrack) return null;
 
+    console.warn('');
+
+
     return (
       <div className="spotify-player">
-        <div>{`Currently playing: ${currentTrack.artists[0].name} - ${currentTrack.name}`}</div>
-        <div>
-          {`time left: ${Math.floor(currentTrack.duration_ms / 1000)}`}
+        <div className="left-container">
+          <img src={currentTrack.album.images[0].url} />
+          <div className="artist-track">
+            <div>{currentTrack.artists[0].name}</div>
+            <div>{currentTrack.name}</div>
+          </div>
         </div>
         <div className="spotify-player--slider-track">
           <Slider

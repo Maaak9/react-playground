@@ -2,8 +2,7 @@
   position: fixed;
   width: 100%;
   min-height: 50px;
-  /*background: #80B7A7;*/
-  background: burlywood;
+  background: #80B7A7;
   margin: auto;
   z-index: 10;
 }
