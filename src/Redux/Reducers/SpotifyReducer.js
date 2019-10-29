@@ -1,10 +1,3 @@
-import {
-  SET_CURRENT_TRACK,
-  SET_SPOTIFY_SEARCH_RESULT,
-  SET_AVAILABLE_DEVICES,
-  SET_SELECTED_DEVICE,
-} from '../Actions/SpotifyActions';
-
 const defaultState = {
   spotifyTest: 'yeeeeppp',
   auth: {},
@@ -26,25 +19,26 @@ const SpotifyReducer = (state = defaultState, action) => {
         topTracks: action.topTracks,
       };
     }
-    case SET_CURRENT_TRACK: {
+    case 'SET_CURRENT_TRACK': {
       return {
         ...state,
         currentTrack: action.track,
+        interval: action.interval,
       };
     }
-    case SET_SPOTIFY_SEARCH_RESULT: {
+    case 'SET_SPOTIFY_SEARCH_RESULT': {
       return {
         ...state,
         searchResult: action.searchData,
       };
     }
-    case SET_AVAILABLE_DEVICES: {
+    case 'SET_AVAILABLE_DEVICES': {
       return {
         ...state,
         devices: action.devices,
       };
     }
-    case SET_SELECTED_DEVICE: {
+    case 'SET_SELECTED_DEVICE': {
       return {
         ...state,
         selectedDevice: action.device,
@@ -53,6 +47,6 @@ const SpotifyReducer = (state = defaultState, action) => {
     default:
       return state;
   }
-}
+};
 
 export default SpotifyReducer;

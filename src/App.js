@@ -10,8 +10,9 @@ import About from './Routes/About';
 import Game from './Routes/Game';
 import Spotify from './Routes/Spotify';
 
-import SpotifyReducer from './/Redux/Reducers/SpotifyReducer';
-import SpotifyQuizReducer from './/Redux/Reducers/SpotifyQuiz';
+import SpotifyReducer from './Redux/Reducers/SpotifyReducer';
+import SpotifyQuizReducer from './Redux/Reducers/SpotifyQuiz';
+import SpotifyQuizCreatorReducer from './Redux/Reducers/SpotifyQuizCreator';
 import bomberManReducer from './Redux/Reducers/bomberManReducer';
 
 
@@ -19,6 +20,7 @@ import bomberManReducer from './Redux/Reducers/bomberManReducer';
 const store = createStore(combineReducers({
   bomberman: bomberManReducer,
   spotify: SpotifyReducer,
+  spotifyQuizCreator: SpotifyQuizCreatorReducer,
   spotifyQuiz: SpotifyQuizReducer,
 }),
   compose(

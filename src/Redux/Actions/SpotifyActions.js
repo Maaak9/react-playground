@@ -1,10 +1,5 @@
 import { SPOTIFY_REDIRECT_URL } from '../../env.js';
 
-export const SET_CURRENT_TRACK = 'SET_CURRENT_TRACK';
-export const SET_SPOTIFY_SEARCH_RESULT = 'SET_SPOTIFY_SEARCH_RESULT';
-export const SET_AVAILABLE_DEVICES = 'SET_AVAILABLE_DEVICES';
-export const SET_SELECTED_DEVICE = 'SET_SELECTED_DEVICE';
-
 const SpotifyWebApi = require('spotify-web-api-js');
 const spotifyApi = new SpotifyWebApi();
 
@@ -26,12 +21,12 @@ export const getSpotifyAuth = () => () => {
 };
 
 export const selectDevice = (device) => (dispatch) => {
-  dispatch({ type: SET_SELECTED_DEVICE, device });
+  dispatch({ type: 'SET_SELECTED_DEVICE', device });
 };
 
 export const getAvailableDevices = () => (dispatch) => {
   spotifyApi.getMyDevices().then((data) => {
-    dispatch({ type: SET_AVAILABLE_DEVICES, devices: data.devices });
+    dispatch({ type: 'SET_AVAILABLE_DEVICES', devices: data.devices });
     // if we have device set first one as default
     if (data.devices.length > 0) {
       dispatch(selectDevice(data.devices[0]));
@@ -85,21 +80,30 @@ export const spotifyPlayerPause = () => (dispatch, getState) => {
 
 export const spotifySearch = (searchText) => (dispatch, getState) => {
   spotifyApi.searchTracks(searchText, { limit: 20 }).then((data) => {
-    dispatch({ type: SET_SPOTIFY_SEARCH_RESULT, searchData: data });
+    dispatch({ type: 'SET_SPOTIFY_SEARCH_RESULT', searchData: data });
   }, (err) => { console.warn('Something went wrong!', err); });
 };
 
-export const playTrack = (track, positionMs = 0) => (dispatch, getState) => {
+export const playTrack = (track, trackInterval) => (dispatch, getState) => {
+  const interval = {
+    ...{
+      positionStartMs: 0,
+      positionEndMs: 20000,
+    },
+    ...trackInterval,
+  };
+
   const { selectedDevice } = getState().spotify;
 
   dispatch({
-    type: SET_CURRENT_TRACK,
+    type: 'SET_CURRENT_TRACK',
     track,
+    interval,
   });
 
   spotifyApi.play({
     device_id: selectedDevice.id,
     uris: [track.uri],
-    position_ms: positionMs,
+    position_ms: interval.positionStartMs,
   }).then((data) => {}, (err) => { console.warn('Something went wrong!', err); });
 };

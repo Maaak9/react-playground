@@ -30,9 +30,15 @@ export default class SpotifyPlayer extends React.Component {
     console.log((100 / e[0]));
     console.log(currentTrack.duration_ms);
 
-    const positionMs = Math.floor((e[0] / 100 ) * currentTrack.duration_ms);
+    const trackInterval = {
+      positionStartMs: Math.floor((e[0] / 100 ) * currentTrack.duration_ms),
+      positionEndMs: Math.floor((e[1] / 100 ) * currentTrack.duration_ms)
+    };
 
-    playTrack(currentTrack, positionMs);
+    const positionStartMs = Math.floor((e[0] / 100 ) * currentTrack.duration_ms);
+    const positionEndMs = Math.floor((e[1] / 100 ) * currentTrack.duration_ms);
+
+    playTrack(currentTrack, trackInterval);
   }
 
   render() {
@@ -56,6 +62,7 @@ export default class SpotifyPlayer extends React.Component {
         </div>
         <div className="spotify-player--slider-track">
           <div className="controllers">
+            <button className="btn btn-secondary">Add track to quiz</button>
             <button className="btn btn-secondary">S</button>
             <button className="btn btn-secondary">P</button>
           </div>
