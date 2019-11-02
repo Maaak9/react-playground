@@ -62,9 +62,8 @@ export default class SpotifyPlayer extends React.Component {
         </div>
         <div className="spotify-player--slider-track">
           <div className="controllers">
-            <button className="btn btn-secondary">Add track to quiz</button>
-            <button className="btn btn-secondary">S</button>
-            <button className="btn btn-secondary">P</button>
+            <button className="btn btn-secondary">+</button>
+            <button className="btn btn-secondary">S/P</button>
           </div>
           <Slider
             className="track"

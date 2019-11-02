@@ -8,6 +8,7 @@
 .spotify-button-wrapper {
   display: flex;
   margin: 10px;
+  flex-wrap: wrap;
 }
 
 .spotify-button-wrapper button {
@@ -23,6 +24,15 @@
   padding: 10px 20px 10px 20px;
   border-radius: 5px;
   background: #80B7A7;
+}
+
+@media only screen and (max-width: 600px) {
+  .spotify-player .left-container img{
+    display: none;
+  }
+  .spotify-player .spotify-player--slider-track {
+    margin: auto 10px 4px 10px;
+  }
 }
 
 .spotify-player .left-container img{
@@ -95,6 +105,7 @@
 .spotify--list-tracks {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 /*
