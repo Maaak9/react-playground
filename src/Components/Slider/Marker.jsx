@@ -1,6 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import cc from '../../Util/classcat.js'
+import styled from 'styled-components'
+
+const SliderMarker = styled.div`
+  margin-top: -5px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #000;
+  -ms-touch-action: pan-x;
+  touch-action: pan-x;
+  position: absolute;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+  background-color: #000;
+  transform: translatex(-50%);
+  outline: none;
+
+  :focused {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+  }
+  :active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+  }
+
+`;
 
 export default class Marker extends React.Component {
   constructor(props) {
@@ -47,10 +77,6 @@ export default class Marker extends React.Component {
   }
 
   render() {
-    const {
-      className,
-    } = this.props;
-
     const { currentOffset } = this.props.marker;
 
     const style = {
@@ -58,12 +84,9 @@ export default class Marker extends React.Component {
     };
 
     return (
-      <div
+      <SliderMarker
         style={style}
         tabIndex={1}
-        className={cc({
-          'slider-marker': true,
-        })}
         onMouseDown={this.onMouseDownStartHandler}
         // onDragStart={this.onDragStartHandler}
         // onDrag={this.onDragHandler}

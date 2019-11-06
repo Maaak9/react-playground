@@ -15,8 +15,6 @@ import SpotifyQuizReducer from './Redux/Reducers/SpotifyQuiz';
 import SpotifyQuizCreatorReducer from './Redux/Reducers/SpotifyQuizCreator';
 import bomberManReducer from './Redux/Reducers/bomberManReducer';
 
-
-
 const store = createStore(combineReducers({
   bomberman: bomberManReducer,
   spotify: SpotifyReducer,

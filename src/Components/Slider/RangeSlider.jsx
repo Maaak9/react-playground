@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import debounce from '../../Util/debounce.js';
 import Marker from './Marker';
 import PropTypes from 'prop-types';
-import '../../styles/css/components/slider.css';
+import { SliderContainer, BackgroundTrack, IntervalTrack, SliderTrack } from '../../styles/css/components/RangeSlider.js';
 
 const createId = function () {
   return '_' + Math.random().toString(36).substr(2, 9);
@@ -171,9 +171,7 @@ class RangeSlider extends Component {
 
   render() {
     const { trackSize, marker0, marker1 } = this.state;
-
-    let min;
-    let max;
+    let min, max;
 
     if (marker0.currentOffset < marker1.currentOffset) {
       min = marker0.currentOffset;
@@ -189,55 +187,40 @@ class RangeSlider extends Component {
     };
 
     return (
-      <div>
-        <div className="slider-container">
-          <div className="background-track" />
-          <div style={style} className="interval-track" />
-          <div
-            id={this.id}
-            className="slider-track"
-            onClick={this.onClickTrack}
+      <SliderContainer className="kuuken">
+        <BackgroundTrack />
+        <IntervalTrack style={style} />
+        <SliderTrack
+          id={this.id}
+          onClick={this.onClickTrack}
+        />
+        { trackSize ? (
+        <React.Fragment>
+          <Marker
+            markerKey="marker0"
+            onDragMarker={this.onDragMarker}
+            onDragMarkerEnd={this.onDragMarkerEnd}
+            marker={{
+              ...marker0,
+              currentOffset: this.props.marker0.currentOffset || marker0.currentOffset,
+            }}
           />
-          { trackSize ? (
-          <React.Fragment>
-            <Marker
-              className={marker0.className}
-              markerKey="marker0"
-              onDragMarker={this.onDragMarker}
-              onDragMarkerEnd={this.onDragMarkerEnd}
-              marker={{
-                ...marker0,
-                currentOffset: this.props.marker0.currentOffset || marker0.currentOffset,
-              }}
-            />
-            <Marker
-              className={marker1.className}
-              markerKey="marker1"
-              onDragMarker={this.onDragMarker}
-              onDragMarkerEnd={this.onDragMarkerEnd}
-              marker={{
-                ...marker1,
-                currentOffset: this.props.marker1.currentOffset || marker1.currentOffset,
-              }}
-            />
-          </React.Fragment>
-          ) : ''
-          }
-        </div>
-      </div>
+          <Marker
+            markerKey="marker1"
+            onDragMarker={this.onDragMarker}
+            onDragMarkerEnd={this.onDragMarkerEnd}
+            marker={{
+              ...marker1,
+              currentOffset: this.props.marker1.currentOffset || marker1.currentOffset,
+            }}
+          />
+        </React.Fragment>
+        ) : ''
+        }
+      </SliderContainer>
     );
   }
 }
-
-// RangeSlider.propTypes = {
-//   min: PropTypes.number.isRequired,
-//   max: PropTypes.number.isRequired,
-//   onChange: PropTypes.function,
-//   onAfterChange: PropTypes.function,
-//   className: PropTypes.string,
-//   marker0: PropTypes.object,
-//   marker1: PropTypes.object,
-// };
 
 RangeSlider.defaultProps = {
   className: null,
