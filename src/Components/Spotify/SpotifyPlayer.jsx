@@ -6,18 +6,13 @@ export default class SpotifyPlayer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-
-    }
-
+    this.state = {};
     this.onChangeSlider = debounce(this.onChangeSlider.bind(this), 100);
     this.onAfterChange = this.onAfterChange.bind(this);
   }
 
   onAfterChange(e) {
     const { playTrack, currentTrack } = this.props;
-    console.log('after ', e);
-
     const positionMs = (e[0] / 100) * currentTrack.duration_ms;
 
     playTrack(currentTrack.uri, positionMs);
@@ -25,19 +20,10 @@ export default class SpotifyPlayer extends React.Component {
 
   onChangeSlider(e) {
     const { playTrack, currentTrack } = this.props;
-    console.log('change ', e[0])
-
-    console.log((100 / e[0]));
-    console.log(currentTrack.duration_ms);
-
     const trackInterval = {
       positionStartMs: Math.floor((e[0] / 100 ) * currentTrack.duration_ms),
       positionEndMs: Math.floor((e[1] / 100 ) * currentTrack.duration_ms)
     };
-
-    const positionStartMs = Math.floor((e[0] / 100 ) * currentTrack.duration_ms);
-    const positionEndMs = Math.floor((e[1] / 100 ) * currentTrack.duration_ms);
-
     playTrack(currentTrack, trackInterval);
   }
 
@@ -47,9 +33,6 @@ export default class SpotifyPlayer extends React.Component {
     } = this.props;
 
     if (!currentTrack) return null;
-
-    console.warn('');
-
 
     return (
       <div className="spotify-player">

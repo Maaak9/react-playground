@@ -44,6 +44,7 @@ export const initSpotify = () => (dispatch, getState) => {
       spotifyApi.setAccessToken(token[0]);
       dispatch({ type: 'SET_SPOTIFY_AUTH', authToken: token[0] });
       dispatch(getAvailableDevices());
+      dispatch(getCurrentPlaybackState());
     }
   }
 };
@@ -107,3 +108,18 @@ export const playTrack = (track, trackInterval) => (dispatch, getState) => {
     position_ms: interval.positionStartMs,
   }).then((data) => {}, (err) => { console.warn('Something went wrong!', err); });
 };
+
+export const getCurrentPlaybackState = () => (dispatch, getState) => {
+  console.warn('getCurrentPlaybackState');
+
+  spotifyApi.getMyCurrentPlaybackState({}).then((data) => {
+    console.log('getCurrentPlaybackState', data);
+
+    dispatch({
+      type: 'SET_CURRENT_TRACK',
+      track: data.item,
+      interval: { positionStartMs: 0, positionEndMs: 20000 },
+    })
+
+  }, (err) => { console.warn('Something went wrong!', err);  })
+}

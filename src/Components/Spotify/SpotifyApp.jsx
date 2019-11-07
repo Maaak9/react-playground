@@ -1,4 +1,6 @@
 import React from "react";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
 
 import {
@@ -47,67 +49,58 @@ class SpotifyApp extends React.Component {
 
     return (
       <React.Fragment>
-        <a data-toggle="modal" href="#myModal" class="btn btn-primary btn-large">Launch demo modal</a>
-
-        <div id="myModal" className="modal" tabIndex="-1" role="dialog">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">Modal title</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <p>Modal body text goes here.</p>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" className="btn btn-primary">Save changes</button>
-              </div>
-            </div>
-          </div>
-        </div>
         <div className="spotify-app">
-          <h2>spotify app should be here</h2>
-          <div className="spotify-button-wrapper">
-            <button className="btn btn-secondary" onClick={() => getSpotifyAuth()}>
-              Autherize spotify?
-            </button>
-            <button className="btn btn-secondary" onClick={() => getTopTracks()}>Get the top tracks</button>
-            <button className="btn btn-secondary" onClick={() => spotifyPlayerPlay()}>Start</button>
-            <button className="btn btn-secondary" onClick={() => spotifyPlayerPause()}>Pause</button>
-          </div>
-          {devices ? (<SelectDevice devices={devices} selectDevice={selectDevice} />) : null}
+        <Grid container spacing={3}>
+          <Grid item xs={12}>
+            <Paper style={{ marginTop: 50, height: 200, padding: 10 }}>
+              <h2>spotify app should be here</h2>
+              <div className="spotify-button-wrapper">
+                <button className="btn btn-secondary" onClick={() => getSpotifyAuth()}>
+                  Autherize spotify?
+                </button>
+                <button className="btn btn-secondary" onClick={() => getTopTracks()}>Get the top tracks</button>
+                <div>
+                  <Search
+                    spotifySearch={spotifySearch}
+                  />
+                </div>
+              </div>
+              {devices ? (<SelectDevice devices={devices} selectDevice={selectDevice} />) : null}
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper style={{ padding: 10, height: '100%' }}>
+              <div>
+                { topTracks ? (
+                  <ListTracks
+                    title={"Toptracks"}
+                    items={topTracks.items}
+                    playTrack={playTrack}
+                  />
+                ) : null
+                }
+              </div>
+            </Paper>
+          </Grid>
+          <Grid item xs={6}>
+            <Paper style={{ padding: 10, height: '100%' }}>
+              <div>
+                { searchResult ? (
+                  <ListTracks
+                    title={"Search result"}
+                    items={searchResult.tracks.items}
+                    playTrack={playTrack}
+                  />
+                ) : null
+                }
+              </div>
+            </Paper>
+          </Grid>
+        </Grid>
           <SpotifyPlayer
             currentTrack={currentTrack}
             playTrack={playTrack}
           />
-          <div>
-            <Search
-              spotifySearch={spotifySearch}
-            />
-          </div>
-          <div>
-            { searchResult ? (
-              <ListTracks
-                title={"Search result"}
-                items={searchResult.tracks.items}
-                playTrack={playTrack}
-              />
-            ) : null
-            }
-          </div>
-          <div>
-            { topTracks ? (
-              <ListTracks
-                title={"Toptracks"}
-                items={topTracks.items}
-                playTrack={playTrack}
-              />
-            ) : null
-            }
-          </div>
         </div>
       </React.Fragment>
     )

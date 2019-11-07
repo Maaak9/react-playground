@@ -10,9 +10,7 @@ class Home extends React.Component {
       return (
         <div className="spotify-page">
           <Header />
-          <div>
             <SpotifyApp />
-          </div>
           <Footer />
         </div>
       )
