@@ -1,6 +1,6 @@
 import React from "react";
-import Slider from '../Slider/RangeSlider';
-import debounce from '../../Util/debounce.js';
+import Slider from '../../Slider/RangeSlider';
+import debounce from '../../../Util/debounce.js';
 
 export default class SpotifyPlayer extends React.Component {
   constructor(props) {
@@ -33,6 +33,9 @@ export default class SpotifyPlayer extends React.Component {
     } = this.props;
 
     if (!currentTrack) return null;
+
+    // <button className="btn btn-secondary" onClick={() => spotifyPlayerPlay()}>Start</button>
+    // <button className="btn btn-secondary" onClick={() => spotifyPlayerPause()}>Pause</button>
 
     return (
       <div className="spotify-player">

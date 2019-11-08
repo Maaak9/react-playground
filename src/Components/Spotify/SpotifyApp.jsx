@@ -16,11 +16,14 @@ import {
 
 import '../../styles/css/components/spotifyApp.css';
 
-import TopTracks from './TopTracks';
-import Search from './Search';
-import SpotifyPlayer from './SpotifyPlayer';
+import TopTracks from './LeftBar/TopTracks';
+import Search from './TopBar/Search';
+import SpotifyPlayer from './Bottom/SpotifyPlayer';
 import ListTracks from './ListTracks';
-import SelectDevice from './SelectDevice';
+import SelectDevice from './TopBar/SelectDevice';
+import TopBar from "./TopBar/TopBar";
+import LeftBar from "./LeftBar/LeftBar";
+import RightBar from "./RightBar/RightBar";
 
 class SpotifyApp extends React.Component {
   constructor(props) {
@@ -53,47 +56,29 @@ class SpotifyApp extends React.Component {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper style={{ marginTop: 50, height: 200, padding: 10 }}>
-              <h2>spotify app should be here</h2>
-              <div className="spotify-button-wrapper">
-                <button className="btn btn-secondary" onClick={() => getSpotifyAuth()}>
-                  Autherize spotify?
-                </button>
-                <button className="btn btn-secondary" onClick={() => getTopTracks()}>Get the top tracks</button>
-                <div>
-                  <Search
-                    spotifySearch={spotifySearch}
-                  />
-                </div>
-              </div>
-              {devices ? (<SelectDevice devices={devices} selectDevice={selectDevice} />) : null}
+              <TopBar
+                getSpotifyAuth={getSpotifyAuth}
+                getTopTracks={getTopTracks}
+                spotifySearch={spotifySearch}
+                devices={devices}
+                selectDevice={selectDevice}
+              />
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper style={{ padding: 10, height: '100%' }}>
-              <div>
-                { topTracks ? (
-                  <ListTracks
-                    title={"Toptracks"}
-                    items={topTracks.items}
-                    playTrack={playTrack}
-                  />
-                ) : null
-                }
-              </div>
+              <LeftBar
+                topTracks={topTracks}
+                playTrack={playTrack}
+              />
             </Paper>
           </Grid>
           <Grid item xs={6}>
             <Paper style={{ padding: 10, height: '100%' }}>
-              <div>
-                { searchResult ? (
-                  <ListTracks
-                    title={"Search result"}
-                    items={searchResult.tracks.items}
-                    playTrack={playTrack}
-                  />
-                ) : null
-                }
-              </div>
+              <RightBar
+                searchResult={searchResult}
+                playTrack={playTrack}
+              />
             </Paper>
           </Grid>
         </Grid>
