@@ -16,11 +16,7 @@ import {
 
 import '../../styles/css/components/spotifyApp.css';
 
-import TopTracks from './LeftBar/TopTracks';
-import Search from './TopBar/Search';
 import SpotifyPlayer from './Bottom/SpotifyPlayer';
-import ListTracks from './ListTracks';
-import SelectDevice from './TopBar/SelectDevice';
 import TopBar from "./TopBar/TopBar";
 import LeftBar from "./LeftBar/LeftBar";
 import RightBar from "./RightBar/RightBar";
