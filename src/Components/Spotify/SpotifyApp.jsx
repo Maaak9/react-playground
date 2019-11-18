@@ -20,6 +20,7 @@ import SpotifyPlayer from './Bottom/SpotifyPlayer';
 import TopBar from "./TopBar/TopBar";
 import LeftBar from "./LeftBar/LeftBar";
 import RightBar from "./RightBar/RightBar";
+import DialogContainer from "../Dialog/DialogContainer";
 
 class SpotifyApp extends React.Component {
   constructor(props) {
@@ -61,7 +62,7 @@ class SpotifyApp extends React.Component {
               />
             </Paper>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} >
             <Paper style={{ padding: 10, height: '100%' }}>
               <LeftBar
                 topTracks={topTracks}
@@ -69,7 +70,7 @@ class SpotifyApp extends React.Component {
               />
             </Paper>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6} >
             <Paper style={{ padding: 10, height: '100%' }}>
               <RightBar
                 searchResult={searchResult}
@@ -78,10 +79,13 @@ class SpotifyApp extends React.Component {
             </Paper>
           </Grid>
         </Grid>
-          <SpotifyPlayer
-            currentTrack={currentTrack}
-            playTrack={playTrack}
-          />
+          { false ? (
+            <SpotifyPlayer
+              currentTrack={currentTrack}
+              playTrack={playTrack}
+            />
+          ) : null
+          }
         </div>
       </React.Fragment>
     )

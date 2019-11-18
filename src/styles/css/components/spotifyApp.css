@@ -15,6 +15,7 @@
   margin: 5px;
 }
 
+/*
 .spotify-player {
   display: flex;
   position: fixed;
@@ -35,15 +36,19 @@
   }
 }
 
+
 .spotify-player .left-container img{
   width: 75px;
 }
 
+*/
+
+/*
 .spotify-player .spotify-player--slider-track {
   flex-grow: 1;
   margin: auto 20px 4px 40px;
-}
-
+} */
+/*
 .spotify-player .controllers {
   text-align: center;
   margin: 10px;
@@ -60,7 +65,7 @@
 .spotify-player .artist-track {
   font-size: 12px;
   margin: auto auto auto 10px;
-}
+} */
 
 .spotify--top-tracks ul {
   display: flex;

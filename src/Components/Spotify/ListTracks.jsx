@@ -1,4 +1,6 @@
 import React from "react";
+import Button from '@material-ui/core/Button';
+import DialogContainer from "../Dialog/DialogContainer";
 
 export default function(props) {
   const { playTrack, title, items } = props;
@@ -8,19 +10,22 @@ export default function(props) {
   return (
     <div className="spotify--list-tracks">
       <h2>{title}</h2>
-      { items.map((item, index) => {
+      { items.map((track, index) => {
         return (
           <div
-            onClick={() => { playTrack(item); }}
-            key={`${item.id}`}
+            onClick={() => { playTrack(track); }}
+            key={`${track.id}`}
           >
             <div className="title-wrapper">
-              <div>{`${item.name}`}</div>
-              <div>{`${item.artists[0].name}`}</div>
+              <div>{`${track.name}`}</div>
+              <div>{`${track.artists[0].name}`}</div>
             </div>
             <div>
-              <img src={item.album.images[1].url} />
+              <img src={track.album.images[1].url} />
             </div>
+            <DialogContainer
+              track={track}
+            />
           </div>
         );
       }) }

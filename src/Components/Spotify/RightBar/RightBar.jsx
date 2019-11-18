@@ -1,10 +1,19 @@
 import React from "react";
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { Icon } from '@material-ui/core';
+import { SortableContainer, SortableElement, sortableHandle } from 'react-sortable-hoc';
+import styled from 'styled-components'
+
 import ListTracks from "../ListTracks";
+import QuestionItem from './QuestionItem';
+
+const SortabelItemWrapper = styled.div`
+  margin: 5px;
+  margin-bottom: 10px;
+
+  .material-icons {
+    margin-right: 10px;
+  }
+`;
 
 export default function(props) {
   const {
@@ -12,86 +21,67 @@ export default function(props) {
     playTrack,
   } = props;
 
-  const [expanded, setExpanded] = React.useState(false);
+  const DragHandle = sortableHandle(() => <Icon className="fas fa-grip-lines" />);
 
-  const handleChange = panel => (event, isExpanded) => {
-    setExpanded(isExpanded ? panel : false);
+  const SortableItem = SortableElement(({item}) => {
+    return (
+      <SortabelItemWrapper>
+        <QuestionItem
+          DragHandle={DragHandle}
+          item={item}
+        />
+      </SortabelItemWrapper>
+    )
+  });
+
+  const SortableList = SortableContainer(({items}) => {
+    return (
+      <div>
+        {items.map((item, index) => (
+            <SortableItem key={`item-${index}`} index={index} item={item} />
+        ))}
+      </div>
+    );
+  });
+
+  const deItems = [
+    {
+      summary: 'General settings I am an expansion panel',
+      content: 'Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam egetmaximus est, id dignissim quam.',
+      panelIndex: 1,
+    },
+    {
+      summary: 'You are currently not an owner',
+      content: `Optimizing dime bags of pre-rolled honey oil dabs. California kush roll it up into a fat blunt for medicinal purposes to elevate your consciousness. Rolling down the street smoking endo, laid back. Oh my gawd, they like totally know I'm high. Rasta!`,
+      panelIndex: 2,
+    },
+    {
+      summary: 'This is pretty coool',
+      content: `An ancient plant referenced biblically as the Holy Herb and gets your noggin’ rocked. OG grandaddy purps with notes of diesel. Extremely dope chronic eye drops in the basement with psychedelli`,
+      panelIndex: 3,
+    },
+    {
+      summary: 'lelelel wwowo',
+      content: `Optimizing dime bags of pre-rolled honey oil dabs. California kush roll it up into a fat blunt for medicinal purposes to elevate your consciousness. Rolling down the street smoking endo, laid back. Oh my gawd, they like totally know I'm high. Rasta!
+
+      An ancient plant referenced biblically as the Holy Herb and gets your noggin’ rocked. OG grandaddy purps with notes of diesel. Extremely dope chronic eye drops in the basement with psychedellic nugs. Hot box at 4:20 the fatty dank endo doobie in a cashed roachclip, Bogart. Fully man, keif gummies are the indoor equivalent of body high super mellow.
+      `,
+      panelIndex: 4,
+    },
+  ]
+
+  const onSortEnd = ({oldIndex, newIndex}) => {
+    console.warn('oldIndex', oldIndex);
+    console.warn('newIndex', newIndex);
   };
 
   return (
     <React.Fragment>
-      <div>
-      <ExpansionPanel expanded={expanded === 'panel1'} onChange={handleChange('panel1')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel1bh-content"
-          id="panel1bh-header"
-        >
-          <Typography>General settings</Typography>
-          <Typography>I am an expansion panel</Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat. Aliquam eget
-            maximus est, id dignissim quam.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel2'} onChange={handleChange('panel2')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography>Users</Typography>
-          <Typography>
-            You are currently not an owner
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel3'} onChange={handleChange('panel3')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography>Users</Typography>
-          <Typography>
-            You are currently not an owner
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      <ExpansionPanel expanded={expanded === 'panel4'} onChange={handleChange('panel4')}>
-        <ExpansionPanelSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2bh-content"
-          id="panel2bh-header"
-        >
-          <Typography>Users</Typography>
-          <Typography>
-            You are currently not an owner
-          </Typography>
-        </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat lectus, varius pulvinar
-            diam eros in elit. Pellentesque convallis laoreet laoreet.
-          </Typography>
-        </ExpansionPanelDetails>
-      </ExpansionPanel>
-      </div>
+      <SortableList
+        onSortEnd={onSortEnd}
+        useDragHandle={true}
+        items={deItems}
+      />
       <div>
         { searchResult ? (
           <ListTracks

@@ -1,6 +1,40 @@
 import React from "react";
 import Slider from '../../Slider/RangeSlider';
 import debounce from '../../../Util/debounce.js';
+import styled from 'styled-components';
+
+const SpotifyPlayerWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 10px 20px 10px 20px;
+  border-radius: 5px;
+  background: #80B7A7;
+
+  .left-container img{
+    width: 75px;
+  }
+  .spotify-player--slider-track {
+    flex-grow: 1;
+    margin: auto 20px 4px 40px;
+  }
+  .controllers {
+    text-align: center;
+    margin: 10px;
+  }
+  .controllers button {
+    margin: 0 5px 0 5px;
+  }
+  .left-container {
+    display: flex;
+  }
+  .artist-track {
+    font-size: 12px;
+    margin: auto auto auto 10px;
+  }
+`;
+
 
 export default class SpotifyPlayer extends React.Component {
   constructor(props) {
@@ -38,7 +72,7 @@ export default class SpotifyPlayer extends React.Component {
     // <button className="btn btn-secondary" onClick={() => spotifyPlayerPause()}>Pause</button>
 
     return (
-      <div className="spotify-player">
+      <SpotifyPlayerWrapper>
         <div className="left-container">
           <img src={currentTrack.album.images[0].url} />
           <div className="artist-track">
@@ -67,7 +101,7 @@ export default class SpotifyPlayer extends React.Component {
             onAfterChange={this.onAfterChange}
           />
         </div>
-      </div>
+      </SpotifyPlayerWrapper>
     );
   }
 };
