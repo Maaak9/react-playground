@@ -1,9 +1,8 @@
 import React from "react";
-import Button from '@material-ui/core/Button';
 import DialogContainer from "../Dialog/DialogContainer";
 
 export default function(props) {
-  const { playTrack, title, items } = props;
+  const { playTrack, title, items, addQuizQuestion } = props;
 
   console.log('the list! ', props)
 
@@ -25,6 +24,7 @@ export default function(props) {
             </div>
             <DialogContainer
               track={track}
+              addQuizQuestion={addQuizQuestion}
             />
           </div>
         );

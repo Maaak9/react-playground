@@ -14,13 +14,17 @@ import {
   selectDevice,
 } from '../../Redux/Actions/SpotifyActions';
 
+import {
+  addQuizQuestion,
+  updateQuizQuestionOrder
+} from "../../Redux/Actions/SpotifyQuizCreator";
+
 import '../../styles/css/components/spotifyApp.css';
 
 import SpotifyPlayer from './Bottom/SpotifyPlayer';
 import TopBar from "./TopBar/TopBar";
 import LeftBar from "./LeftBar/LeftBar";
 import RightBar from "./RightBar/RightBar";
-import DialogContainer from "../Dialog/DialogContainer";
 
 class SpotifyApp extends React.Component {
   constructor(props) {
@@ -43,6 +47,9 @@ class SpotifyApp extends React.Component {
       searchResult,
       devices,
       selectDevice,
+      addQuizQuestion,
+      spotifyQuizCreator,
+      updateQuizQuestionOrder,
     } = this.props;
 
 
@@ -67,6 +74,7 @@ class SpotifyApp extends React.Component {
               <LeftBar
                 topTracks={topTracks}
                 playTrack={playTrack}
+                addQuizQuestion={addQuizQuestion}
               />
             </Paper>
           </Grid>
@@ -75,6 +83,9 @@ class SpotifyApp extends React.Component {
               <RightBar
                 searchResult={searchResult}
                 playTrack={playTrack}
+                addQuizQuestion={addQuizQuestion}
+                quizQuestions={spotifyQuizCreator.quizQuestions}
+                updateQuizQuestionOrder={updateQuizQuestionOrder}
               />
             </Paper>
           </Grid>
@@ -99,6 +110,7 @@ function mapStateToProps(state) {
     currentTrack: state.spotify.currentTrack,
     searchResult: state.spotify.searchResult,
     devices: state.spotify.devices,
+    spotifyQuizCreator: state.spotifyQuizCreator,
   };
 }
 
@@ -111,6 +123,8 @@ const mapDispatchToProps = (dispatch, props) => ({
   spotifySearch: (searchText) => { return dispatch(spotifySearch(searchText)) },
   playTrack: (track, positionMs) => { dispatch(playTrack(track, positionMs)); },
   selectDevice: (device) => { dispatch(selectDevice(device)); },
+  addQuizQuestion: (question) => {return dispatch(addQuizQuestion(question))},
+  updateQuizQuestionOrder: (prevIndex, nextIndex) => { return dispatch(updateQuizQuestionOrder(prevIndex, nextIndex))},
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpotifyApp)

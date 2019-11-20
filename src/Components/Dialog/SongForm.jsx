@@ -23,11 +23,11 @@ export default class SongForm extends React.Component {
     super(props)
     this.state = {
       typeOfAnswer: 'choices',
-      question: '',
-      answer1: '',
-      answer2: '',
-      answer3: '',
-      answer4: '',
+      question: this.props.question || '',
+      answer1: this.props.answer1 || '',
+      answer2: this.props.answer2 || '',
+      answer3: this.props.answer3 || '',
+      answer4: this.props.answer4 || '',
     };
 
     this.onSubmit = this.onSubmit.bind(this)
@@ -35,8 +35,24 @@ export default class SongForm extends React.Component {
     this.onFormChange = this.onFormChange.bind(this);
   }
 
-  onSubmit() {
+  onSubmit(e) {
+    e.stopPropagation();
     console.log('onSubmit')
+    console.warn('the state ?', this.state);
+    const question = {
+      track: this.props.track,
+      typeOfAnswer: this.state.typeOfAnswer,
+      question: this.state.question,
+      answer1: this.state.answer1,
+      answer2: this.state.answer2,
+      answer3: this.state.answer3,
+      answer4: this.state.answer4,
+    };
+
+    console.log('this.props', this.props);
+
+
+    this.props.addQuizQuestion(question);
   }
 
   setTypeOfAnswer(answer) {
@@ -46,9 +62,6 @@ export default class SongForm extends React.Component {
   }
 
   onFormChange(e) {
-    console.log('111', e.target.id);
-    console.log('onFormChange', e.target.value);
-
     this.setState({ [e.target.id]: e.target.value });
   }
 
@@ -63,16 +76,8 @@ export default class SongForm extends React.Component {
       answer4,
     } = this.state;
 
-    console.log('typeOfAnswer', track);
-
-    const submitFormHandler = event => {
-      event.preventDefault();
-
-      console.dir(this.refs.name.value); //will give us the name value
-    }
-
     return (
-      <form noValidate autoComplete="off" onSubmit={submitFormHandler}>
+      <form noValidate autoComplete="off">
         <SongFormWrapper>
           <Grid container spacing={1}>
             <Typography>{`${track.artists[0].name} - ${track.name}`}</Typography>
@@ -168,7 +173,7 @@ export default class SongForm extends React.Component {
               playTrack={() => {} }
             />
           </Grid>
-          <button onClick={() => {}}> Submit </button>
+          <button onClick={this.onSubmit}> Submit </button>
         </SongFormWrapper>
       </form>
     );

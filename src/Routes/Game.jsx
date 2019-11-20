@@ -6,10 +6,6 @@ import Header from '../Layouts/Header';
 import Body from '../Layouts/Body';
 import Footer from '../Layouts/Footer';
 
-import '../styles/css/pages/game.css';
-
-
-
 class Home extends React.Component {
   constructor(props) {
     super(props);

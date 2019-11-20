@@ -4,11 +4,12 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import SongForm from "../../Dialog/SongForm";
 
 
 export default function(props) {
   const {
-    item,
+    question,
     DragHandle,
   } = props;
 
@@ -18,7 +19,6 @@ export default function(props) {
     setExpanded(toggle);
   };
 
-
   return (
     <ExpansionPanel expanded={expanded} onChange={handleChange()}>
       <ExpansionPanelSummary
@@ -27,11 +27,19 @@ export default function(props) {
         id="panel1bh-header"
       >
       <DragHandle />
-      <Typography>{item.summary}</Typography>
+      <Typography>{question.question}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
+        <SongForm
+          track={question.track}
+          question={question.question}
+          answer1={question.answer1}
+          answer2={question.answer2}
+          answer3={question.answer3}
+          answer4={question.answer4}
+        />
         <Typography>
-          {item.content}
+          coooolt
         </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
