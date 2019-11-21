@@ -2,9 +2,16 @@ import React from "react";
 import DialogContainer from "../Dialog/DialogContainer";
 
 export default function(props) {
-  const { playTrack, title, items, addQuizQuestion } = props;
+  const {
+    playTrack,
+    title,
+    items,
+    addQuizQuestion,
+    removeQuizQuestion
+  } = props;
 
-  console.log('the list! ', props)
+  console.log('44444', props);
+
 
   return (
     <div className="spotify--list-tracks">
@@ -25,6 +32,7 @@ export default function(props) {
             <DialogContainer
               track={track}
               addQuizQuestion={addQuizQuestion}
+              removeQuizQuestion={removeQuizQuestion}
             />
           </div>
         );

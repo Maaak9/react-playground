@@ -6,7 +6,17 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import SongForm from './SongForm';
 
-export default function DialogContainer({ track, addQuizQuestion }) {
+export default function DialogContainer(props) {
+  const {
+    track,
+    addQuizQuestion,
+    removeQuizQuestion,
+  } = props;
+
+  console.log('1112222', props);
+
+
+
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (e) => {
@@ -36,6 +46,7 @@ export default function DialogContainer({ track, addQuizQuestion }) {
           <SongForm
             track={track}
             addQuizQuestion={addQuizQuestion}
+            removeQuizQuestion={removeQuizQuestion}
           />
         </DialogContent>
         <DialogActions>

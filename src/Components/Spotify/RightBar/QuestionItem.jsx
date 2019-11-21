@@ -11,6 +11,7 @@ export default function(props) {
   const {
     question,
     DragHandle,
+    removeQuizQuestion,
   } = props;
 
   const [expanded, setExpanded] = React.useState(false);
@@ -37,10 +38,8 @@ export default function(props) {
           answer2={question.answer2}
           answer3={question.answer3}
           answer4={question.answer4}
+          removeQuizQuestion={removeQuizQuestion}
         />
-        <Typography>
-          coooolt
-        </Typography>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

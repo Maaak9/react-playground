@@ -10,7 +10,7 @@ class Home extends React.Component {
     return (
       <div>
         <Header />
-        <Grid style={{ marginBottom: 10, height: '100%'}} container spacing={3}>
+        <Grid item style={{ marginBottom: 10, height: '100%'}} container spacing={3}>
           <TestHeader style={{ marginTop: 100 }}/>
         </Grid>
         <Footer />

@@ -27,14 +27,11 @@ class Home extends React.Component {
   }
 
   render() {
-    const { clientWidth, clientHeight } = document.body;
+    // const { clientWidth, clientHeight } = document.body;
 
 
     const socket = io('http://localhost:8000');
     socket.on('connect', function(){});
-    console.warn('socket', socket);
-
-
 
     return (
       <div>

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { connect } from 'react-redux'
@@ -16,7 +17,8 @@ import {
 
 import {
   addQuizQuestion,
-  updateQuizQuestionOrder
+  updateQuizQuestionOrder,
+  removeQuizQuestion
 } from "../../Redux/Actions/SpotifyQuizCreator";
 
 import '../../styles/css/components/spotifyApp.css';
@@ -38,9 +40,9 @@ class SpotifyApp extends React.Component {
     const {
       getTopTracks,
       getSpotifyAuth,
-      topTracks,
-      spotifyPlayerPlay,
-      spotifyPlayerPause,
+      topTracks,    // spotifyPlayerPlay,
+      // spotifyPlayerPause,
+
       spotifySearch,
       playTrack,
       currentTrack,
@@ -50,14 +52,17 @@ class SpotifyApp extends React.Component {
       addQuizQuestion,
       spotifyQuizCreator,
       updateQuizQuestionOrder,
+      removeQuizQuestion,
     } = this.props;
 
+
+    console.log('wewewewe', removeQuizQuestion);
 
 
     return (
       <React.Fragment>
         <div className="spotify-app">
-        <Grid container spacing={3}>
+        <Grid item container spacing={3}>
           <Grid item xs={12}>
             <Paper style={{ marginTop: 50, height: 200, padding: 10 }}>
               <TopBar
@@ -86,6 +91,7 @@ class SpotifyApp extends React.Component {
                 addQuizQuestion={addQuizQuestion}
                 quizQuestions={spotifyQuizCreator.quizQuestions}
                 updateQuizQuestionOrder={updateQuizQuestionOrder}
+                removeQuizQuestion={removeQuizQuestion}
               />
             </Paper>
           </Grid>
@@ -123,8 +129,33 @@ const mapDispatchToProps = (dispatch, props) => ({
   spotifySearch: (searchText) => { return dispatch(spotifySearch(searchText)) },
   playTrack: (track, positionMs) => { dispatch(playTrack(track, positionMs)); },
   selectDevice: (device) => { dispatch(selectDevice(device)); },
-  addQuizQuestion: (question) => {return dispatch(addQuizQuestion(question))},
-  updateQuizQuestionOrder: (prevIndex, nextIndex) => { return dispatch(updateQuizQuestionOrder(prevIndex, nextIndex))},
+  addQuizQuestion: (question) => { return dispatch(addQuizQuestion(question)) },
+  updateQuizQuestionOrder: (prevIndex, nextIndex) => { return dispatch(updateQuizQuestionOrder(prevIndex, nextIndex)) },
+  removeQuizQuestion: (track) => { console.log('66666', track); return dispatch(removeQuizQuestion(track)) },
 });
+
+SpotifyApp.propTypes = {
+  // from state
+  topTracks: PropTypes.array,
+  currentTrack: PropTypes.object,
+  searchResult: PropTypes.array,
+  devices: PropTypes.array,
+  spotifyQuizCreator: PropTypes.object,
+
+  // Spotify Actions
+  initSpotify: PropTypes.func,
+  getSpotifyAuth: PropTypes.func,
+  getTopTracks: PropTypes.func,
+  spotifyPlayerPlay: PropTypes.func,
+  spotifyPlayerPause: PropTypes.func,
+  spotifySearch: PropTypes.func,
+  playTrack: PropTypes.func,
+  selectDevice: PropTypes.func,
+
+  // SpotifyQuizCreator Actions
+  addQuizQuestion: PropTypes.func,
+  updateQuizQuestionOrder: PropTypes.func,
+  removeQuizQuestion: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SpotifyApp)

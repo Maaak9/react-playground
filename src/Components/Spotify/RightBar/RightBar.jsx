@@ -22,6 +22,7 @@ export default function(props) {
     addQuizQuestion,
     quizQuestions,
     updateQuizQuestionOrder,
+    removeQuizQuestion,
   } = props;
 
   const DragHandle = sortableHandle(() => <Icon className="fas fa-grip-lines" />);
@@ -32,6 +33,7 @@ export default function(props) {
         <QuestionItem
           DragHandle={DragHandle}
           question={question}
+          removeQuizQuestion={removeQuizQuestion}
         />
       </SortabelItemWrapper>
     )
@@ -49,8 +51,6 @@ export default function(props) {
 
   const onSortEnd = ({oldIndex, newIndex}) => {
     updateQuizQuestionOrder(oldIndex, newIndex);
-    console.warn('oldIndex', oldIndex);
-    console.warn('newIndex', newIndex);
   };
 
   return (
@@ -67,6 +67,7 @@ export default function(props) {
             items={searchResult.tracks.items}
             playTrack={playTrack}
             addQuizQuestion={addQuizQuestion}
+            removeQuizQuestion={removeQuizQuestion}
           />
         ) : null
         }

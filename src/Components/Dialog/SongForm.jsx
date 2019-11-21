@@ -2,6 +2,8 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
+import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import styled from 'styled-components'
 import Typography from '@material-ui/core/Typography';
@@ -11,9 +13,15 @@ const SongFormWrapper = styled.div`
   .song-form--question {
     width: 100%;
   }
-
   .chioce-answers {
     width: 100%;
+  }
+  .spotify-player-wrapper {
+    margin-bottom: 15px;
+    margin-top: 10px;
+  }
+  .delete {
+    float: right;
   }
 `;
 
@@ -37,8 +45,6 @@ export default class SongForm extends React.Component {
 
   onSubmit(e) {
     e.stopPropagation();
-    console.log('onSubmit')
-    console.warn('the state ?', this.state);
     const question = {
       track: this.props.track,
       typeOfAnswer: this.state.typeOfAnswer,
@@ -48,9 +54,6 @@ export default class SongForm extends React.Component {
       answer3: this.state.answer3,
       answer4: this.state.answer4,
     };
-
-    console.log('this.props', this.props);
-
 
     this.props.addQuizQuestion(question);
   }
@@ -66,7 +69,11 @@ export default class SongForm extends React.Component {
   }
 
   render() {
-    const { track } = this.props;
+    const {
+      track,
+      removeQuizQuestion,
+    } = this.props;
+
     const {
       typeOfAnswer,
       question,
@@ -76,10 +83,12 @@ export default class SongForm extends React.Component {
       answer4,
     } = this.state;
 
+
+
     return (
       <form noValidate autoComplete="off">
         <SongFormWrapper>
-          <Grid container spacing={1}>
+          <Grid item container spacing={1}>
             <Typography>{`${track.artists[0].name} - ${track.name}`}</Typography>
             <Grid item xs={12}>
               <TextField
@@ -167,13 +176,26 @@ export default class SongForm extends React.Component {
             </React.Fragment>) : null
             }
           </Grid>
-          <Grid xs={12}>
+          <Grid item xs={12} className="spotify-player-wrapper">
             <SpotifyPlayer
               currentTrack={track}
               playTrack={() => {} }
             />
           </Grid>
-          <button onClick={this.onSubmit}> Submit </button>
+          <Button
+            className="update"
+            variant="contained"
+            color="primary"
+            startIcon={<SaveOutlinedIcon />}
+            onClick={this.onSubmit}
+          >Submit</Button>
+          <Button
+            className="delete"
+            variant="contained"
+            color="secondary"
+            startIcon={<DeleteIcon />}
+            onClick={() => { removeQuizQuestion(track) }}
+          >Remove</Button>
         </SongFormWrapper>
       </form>
     );

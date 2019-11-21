@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import debounce from '../../Util/debounce.js';
 import Marker from './Marker';
-import PropTypes from 'prop-types';
 import { SliderContainer, BackgroundTrack, IntervalTrack, SliderTrack } from '../../styles/css/components/RangeSlider.js';
 
 const createId = function () {
