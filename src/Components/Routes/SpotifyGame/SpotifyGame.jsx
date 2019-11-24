@@ -7,7 +7,24 @@ import io from 'socket.io-client';
 import styled from 'styled-components'
 
 const SpotifyGameContainer = styled.div`
-  margin-top: 40px;
+	width: 100%;
+  height:100vh;
+  background: #B0DCE8;
+
+  .center {
+    padding: 10px;
+    width: 150px;
+    height: 100px;
+    background-color: red;
+
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    margin: auto;
+  }
 `;
 
 // import {
@@ -42,12 +59,12 @@ class SpotifyGameWrapper extends React.Component {
 
     return (
       <SpotifyGameContainer>
-        <Grid item container>
-          <button onClick={this.onClickSendMsg}>test to sen msg</button>
-          <div>
-            <h2>hejhje</h2>
-          </div>
-        </Grid>
+        <div className="center">
+          <button
+            onClick={this.onClickSendMsg}
+          >test to sen msg</button>
+          <div>hejhej</div>
+        </div>
       </SpotifyGameContainer>
     );
   }
