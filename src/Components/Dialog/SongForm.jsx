@@ -7,7 +7,7 @@ import SaveOutlinedIcon from '@material-ui/icons/SaveOutlined';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
 import styled from 'styled-components'
 import Typography from '@material-ui/core/Typography';
-import SpotifyPlayer from '../Spotify/Bottom/SpotifyPlayer';
+import SpotifyPlayer from '../Routes/Spotify/Bottom/SpotifyPlayer';
 
 const SongFormWrapper = styled.div`
   .song-form--question {

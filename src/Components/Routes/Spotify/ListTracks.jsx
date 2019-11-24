@@ -1,5 +1,5 @@
 import React from "react";
-import DialogContainer from "../Dialog/DialogContainer";
+import DialogContainer from "../../Dialog/DialogContainer";
 
 export default function(props) {
   const {
@@ -27,7 +27,7 @@ export default function(props) {
               <div>{`${track.artists[0].name}`}</div>
             </div>
             <div>
-              <img src={track.album.images[1].url} />
+              <img alt="album-cover" src={track.album.images[1].url} />
             </div>
             <DialogContainer
               track={track}

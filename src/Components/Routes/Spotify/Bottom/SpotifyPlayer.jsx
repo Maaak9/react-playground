@@ -1,6 +1,6 @@
 import React from "react";
-import Slider from '../../Slider/RangeSlider';
-import debounce from '../../../Util/debounce.js';
+import Slider from '../../../Slider/RangeSlider';
+import debounce from '../../../../Util/debounce.js';
 import styled from 'styled-components';
 
 const SpotifyPlayerWrapper = styled.div`
@@ -74,7 +74,7 @@ export default class SpotifyPlayer extends React.Component {
     return (
       <SpotifyPlayerWrapper>
         <div className="left-container">
-          <img src={currentTrack.album.images[0].url} />
+          <img alt="album-cover" src={currentTrack.album.images[0].url} />
           <div className="artist-track">
             <div>{currentTrack.artists[0].name}</div>
             <div>{currentTrack.name}</div>

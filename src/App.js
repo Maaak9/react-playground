@@ -9,6 +9,7 @@ import Users from './Routes/Users';
 import About from './Routes/About';
 import Game from './Routes/Game';
 import Spotify from './Routes/Spotify';
+import SpotifyGame from './Routes/SpotifyGame';
 
 import SpotifyReducer from './Redux/Reducers/SpotifyReducer';
 import SpotifyQuizReducer from './Redux/Reducers/SpotifyQuiz';
@@ -23,7 +24,7 @@ const store = createStore(combineReducers({
 }),
   compose(
     applyMiddleware(thunk),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
   //applyMiddleware(thunk),
   //window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
@@ -40,7 +41,8 @@ function AppRouter() {
           <Route path="/about/" component={About} />
           <Route path="/users/" component={Users} />
           <Route path="/game/" component={Game} />
-          <Route path="/Spotify/" component={Spotify} />
+          <Route path="/spotify/" component={Spotify} />
+          <Route path="/play/" component={SpotifyGame} />
         </div>
       </Router>
     </Provider>

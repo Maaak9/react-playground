@@ -13,15 +13,15 @@ import {
   spotifySearch,
   playTrack,
   selectDevice,
-} from '../../Redux/Actions/SpotifyActions';
+} from '../../../Redux/Actions/SpotifyActions';
 
 import {
   addQuizQuestion,
   updateQuizQuestionOrder,
   removeQuizQuestion
-} from "../../Redux/Actions/SpotifyQuizCreator";
+} from "../../../Redux/Actions/SpotifyQuizCreator";
 
-import '../../styles/css/components/spotifyApp.css';
+import '../../../styles/css/components/spotifyApp.css';
 
 import SpotifyPlayer from './Bottom/SpotifyPlayer';
 import TopBar from "./TopBar/TopBar";

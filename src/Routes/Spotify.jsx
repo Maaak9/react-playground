@@ -1,10 +1,10 @@
 import React from "react";
 import Header from '../Layouts/Header';
 import Footer from '../Layouts/Footer';
-import SpotifyApp from "../Components/Spotify/SpotifyApp";
+import SpotifyApp from "../Components/Routes/Spotify/SpotifyApp";
 
 
-class Home extends React.Component {
+class SpotifyQuizCreator extends React.Component {
     render() {
       return (
         <div className="spotify-page">
@@ -16,5 +16,5 @@ class Home extends React.Component {
     }
   }
 
-export default Home;
+export default SpotifyQuizCreator;
 

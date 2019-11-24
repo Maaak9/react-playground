@@ -2,7 +2,7 @@ import React from "react";
 import Grid from '@material-ui/core/Grid';
 import Header from '../Layouts/Header';
 import Footer from '../Layouts/Footer';
-import TestHeader from "../Components/Spotify/TestHeader/TestHeader";
+import TestHeader from "../Components/Routes/Spotify/TestHeader/TestHeader";
 
 
 class Home extends React.Component {

@@ -4,7 +4,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import SongForm from "../../Dialog/SongForm";
+import SongForm from "../../../Dialog/SongForm";
 
 
 export default function(props) {

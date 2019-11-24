@@ -33,6 +33,7 @@ class Header extends React.Component {
           <Link to="/users/">Users</Link>
           <Link to="/game/">Game</Link>
           <Link to="/spotify/">Spotify</Link>
+          <Link to="/play/" >Play the gaame</Link>
         </Routes>
       </HeaderContainer>
     );

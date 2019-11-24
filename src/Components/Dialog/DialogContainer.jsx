@@ -13,10 +13,6 @@ export default function DialogContainer(props) {
     removeQuizQuestion,
   } = props;
 
-  console.log('1112222', props);
-
-
-
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = (e) => {
